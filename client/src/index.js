@@ -1,15 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App.js'
-import { BrowserRouter, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
+
+import Scheduler from './components/layout/screen/Scheduler'
+import Assistant from './components/layout/screen/Assistant'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Route path='/' component={App} />
-    </BrowserRouter>
+    <Router>
+      <Layout>
+        <Switch>
+          <Route exact path='/scheduler'>
+            <Scheduler />
+          </Route>
+          <Route exact path='/assistant'>
+            <Assistant />
+          </Route>
+        </Switch>
+      </Layout>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 )
