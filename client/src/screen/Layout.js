@@ -1,5 +1,5 @@
-import NavBar from './layout/NavBar'
-import Header from './layout/Header'
+import NavBar from '../components/layout/NavBar'
+import Header from '../components/layout/Header'
 
 function Layout({ children }) {
   return (
