@@ -6,7 +6,7 @@ function Layout({ children }) {
     <div className='flex flex-row h-screen'>
       <NavBar />
 
-      <main className='flex flex-col bg-gray-700 w-full'>
+      <main className='flex flex-col bg-primary-light w-full'>
         <Header />
         {children}
       </main>
