@@ -1,12 +1,12 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-unreachable */
-import { useState } from 'react'
+import React from 'react'
+
 import { LocationMarkerIcon } from '@heroicons/react/solid'
 import {
   ViewState,
   GroupingState,
   IntegratedGrouping
 } from '@devexpress/dx-react-scheduler'
+
 import {
   Scheduler,
   Resources,
@@ -17,17 +17,23 @@ import {
   GroupingPanel
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-export default function App() {
+function index() {
   const schedulerData = [
     {
       title: 'Gimnasio 1',
       startDate: new Date(2021, 5, 14, 10, 0),
       endDate: new Date(2021, 5, 14, 11, 45),
       id: 0,
-      members: {
-        name: 'Nicolás Henríquez',
-        img: <LocationMarkerIcon />
-      },
+      members: [
+        {
+          name: 'Nicolás Henríquez',
+          img: <LocationMarkerIcon />
+        },
+        {
+          name: 'Gabriel Mena',
+          img: <LocationMarkerIcon />
+        }
+      ],
       department: 'Preparador Físico',
       school: 'Escuela de Salud'
     },
@@ -162,6 +168,7 @@ export default function App() {
           <div className='flex text-white items-center gap-2'>
             <LocationMarkerIcon className='w-5 h-5' />
             <span>{data.title}</span>
+            <span>{data.title}</span>
           </div>
         </div>
       </Appointments.AppointmentContent>
@@ -179,14 +186,23 @@ export default function App() {
         <AppointmentTooltip
           headerComponent={({ appointmentData, formatDate }) => {
             return (
-              <div className='flex items-center justify-center font-bold text-lg'>
-                {appointmentData.title}
+              <div className='flex items-center justify-center font-bold text-lg gap-2'>
+                <span>{appointmentData.members.name}</span>
               </div>
             )
           }}
           contentComponent={({ appointmentData, formatDate }) => {
+            const i = appointmentData.members.map((student) => (
+              <div className='flex gap-2'>
+                <span className='h-5 w-5'>{student.img}</span>
+                <span>{student.name}</span>
+              </div>
+            ))
+
             return (
-              <div className='flex items-center justify-center'>Hola Mundo</div>
+              <div className='flex flex-col items-start justify-center gap-2'>
+                {i}
+              </div>
             )
           }}
         />
@@ -196,3 +212,5 @@ export default function App() {
     </div>
   )
 }
+
+export default index
