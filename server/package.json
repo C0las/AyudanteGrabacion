@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir build",
-    "dev": "babel-node src/index.js ",
+    "dev": "babel-node src/index.js",
     "start": "node build/index.js"
   },
   "author": "Nicolas Henriquez and Gabriel Mena",
