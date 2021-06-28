@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import Layout from './components/Layout'
+import Layout from './screen/Layout'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals'
 
-import Scheduler from './components/layout/screen/Scheduler'
-import Assistant from './components/layout/screen/Assistant'
+import Scheduler from './screen/Scheduler'
+import Assistant from './screen/Assistant'
 
 ReactDOM.render(
   <React.StrictMode>
