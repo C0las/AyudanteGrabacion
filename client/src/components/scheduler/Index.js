@@ -1,216 +1,168 @@
-import React from 'react'
-
-import { LocationMarkerIcon } from '@heroicons/react/solid'
-import {
-  ViewState,
-  GroupingState,
-  IntegratedGrouping
-} from '@devexpress/dx-react-scheduler'
-
+import * as React from 'react'
+import { connect } from 'react-redux'
+import { ViewState } from '@devexpress/dx-react-scheduler'
 import {
   Scheduler,
-  Resources,
-  DayView,
   WeekView,
+  Toolbar,
+  DateNavigator,
   Appointments,
-  AppointmentTooltip,
-  GroupingPanel
+  DayView,
+  ViewSwitcher,
+  Resources
 } from '@devexpress/dx-react-scheduler-material-ui'
 
-function index() {
-  const schedulerData = [
-    {
-      title: 'Gimnasio 1',
-      startDate: new Date(2021, 5, 14, 10, 0),
-      endDate: new Date(2021, 5, 14, 11, 45),
-      id: 0,
-      members: [
-        {
-          name: 'Nicolás Henríquez',
-          img: <LocationMarkerIcon />
-        },
-        {
-          name: 'Gabriel Mena',
-          img: <LocationMarkerIcon />
-        }
-      ],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    {
-      title: 'Gimnasio 1',
-      startDate: new Date(2021, 5, 14, 11, 46),
-      endDate: new Date(2021, 5, 14, 13, 15),
-      id: 0,
-      members: [1],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    {
-      title: 'Gimnasio 2',
-      startDate: new Date(2021, 5, 14, 9, 15),
-      endDate: new Date(2021, 5, 14, 11, 0),
-      id: 0,
-      members: [2],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    {
-      title: 'Gimnasio 2',
-      startDate: new Date(2021, 5, 14, 11, 1),
-      endDate: new Date(2021, 5, 14, 12, 30),
-      id: 0,
-      members: [2],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    {
-      title: 'Gimnasio 2',
-      startDate: new Date(2021, 5, 14, 13, 15),
-      endDate: new Date(2021, 5, 14, 14, 45),
-      id: 0,
-      members: [2],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    {
-      title: 'Gimnasio 3',
-      startDate: new Date(2021, 5, 14, 10, 0),
-      endDate: new Date(2021, 5, 14, 11, 45),
-      id: 0,
-      members: [3],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    {
-      title: 'Gimnasio 3',
-      startDate: new Date(2021, 5, 14, 11, 46),
-      endDate: new Date(2021, 5, 14, 13, 15),
-      id: 0,
-      members: [3],
-      department: 'Preparador Físico',
-      school: 'Escuela de Salud'
-    },
-    // Actuacion
-    {
-      title: 'Actuación 1',
-      startDate: new Date(2021, 5, 14, 13, 16),
-      endDate: new Date(2021, 5, 14, 16, 15),
-      id: 0,
-      members: [1, 2, 3, 4, 5],
-      department: 'Actuación',
-      school: 'Escuela de Comunicación'
-    },
-    {
-      title: 'Actuación 1',
-      startDate: new Date(2021, 5, 14, 16, 16),
-      endDate: new Date(2021, 5, 14, 19, 15),
-      id: 0,
-      members: [1, 2, 3, 4, 5],
-      department: 'Actuación',
-      school: 'Escuela de Comunicación'
-    }
-  ]
+import AppointmentContent from './AppointmentContent'
+import { createSchedulerAction } from '../../actions/index'
+import { SCHOOL, resources } from '../../constants/index'
 
-  const resources = [
-    {
-      fieldName: 'department',
-      title: 'Department',
-      instances: [
-        {
-          id: 'Preparador Físico',
-          text: 'Preparador Físico',
-          color: '#36A5C4'
-        },
-        { id: 'Actuación', text: 'Actuación', color: '#BF0249' },
-        { id: 'Tecnico en Sonido', text: 'Tecnico en Sonido' }
-      ]
-    }
-  ]
-
-  const grouping = [
-    {
-      resourceName: 'school'
-    }
-  ]
-
-  const appointmentContentComponent = ({ data, formatDate, ...restProps }) => {
-    return (
-      <Appointments.AppointmentContent
-        {...restProps}
-        formatDate={formatDate}
-        data={data}
-      >
-        <div className='flex flex-col gap-4'>
-          <div className='flex flex-col'>
-            <div className='text-sm text-white font-bold'> {data.school}</div>
-            <div className='bg-white w-14 h-2 rounded-lg'></div>
-            <div className='text-white text-xs font-semibold mt-3'>
-              {data.department}
-            </div>
-          </div>
-
-          <div className='flex gap-1'>
-            <div>
-              {formatDate(data.startDate, {
-                hour: 'numeric',
-                minute: 'numeric'
-              })}
-            </div>
-            <span>-</span>
-            <div>
-              {formatDate(data.endDate, {
-                hour: 'numeric',
-                minute: 'numeric'
-              })}
-            </div>
-          </div>
-          <div className='flex text-white items-center gap-2'>
-            <LocationMarkerIcon className='w-5 h-5' />
-            <span>{data.title}</span>
-            <span>{data.title}</span>
-          </div>
-        </div>
-      </Appointments.AppointmentContent>
-    )
+const handleButtonClick = (schoolName, schools) => {
+  if (schools.indexOf(schoolName) > -1) {
+    return schools.filter((school) => school !== schoolName)
   }
-
-  return (
-    <div>
-      <Scheduler data={schedulerData} firstDayOfWeek={1} locale='es-Cl'>
-        <ViewState defaultCurrentDate='2021-06-14' />
-        <DayView startDayHour={8} endDayHour={20} cellDuration={15} />
-        <Appointments
-          appointmentContentComponent={appointmentContentComponent}
-        />
-        <AppointmentTooltip
-          headerComponent={({ appointmentData, formatDate }) => {
-            return (
-              <div className='flex items-center justify-center font-bold text-lg gap-2'>
-                <span>{appointmentData.members.name}</span>
-              </div>
-            )
-          }}
-          contentComponent={({ appointmentData, formatDate }) => {
-            const i = appointmentData.members.map((student) => (
-              <div className='flex gap-2'>
-                <span className='h-5 w-5'>{student.img}</span>
-                <span>{student.name}</span>
-              </div>
-            ))
-
-            return (
-              <div className='flex flex-col items-start justify-center gap-2'>
-                {i}
-              </div>
-            )
-          }}
-        />
-
-        <Resources data={resources} mainResourceName='department' />
-      </Scheduler>
-    </div>
-  )
+  const nextSchools = [...schools]
+  nextSchools.push(schoolName)
+  return nextSchools
 }
 
-export default index
+const LocationSelector = ({ onSchoolsChange, schools }) => (
+  <div className='flex items-center gap-2'>
+    {SCHOOL.map((school) => {
+      return (
+        <>
+          <input
+            type='checkbox'
+            name={school}
+            id={school}
+            defaultChecked={true}
+            onClick={() => {
+              onSchoolsChange(handleButtonClick(school, schools))
+            }}
+            key={school}
+            className=''
+          />
+          <label
+            for={school}
+            className='
+            inline-block text-center w-24 text-sm bg-gray-100 rounded cursor-pointer'
+          >
+            {school}
+          </label>
+        </>
+      )
+    })}
+  </div>
+)
+
+const FlexibleSpace = ({ ...restProps }) => (
+  <Toolbar.FlexibleSpace
+    {...restProps}
+    className='flex flex-row items-center justify-center m-auto gap-2'
+  >
+    <ReduxLocationSelector />
+  </Toolbar.FlexibleSpace>
+)
+
+const isRestTime = (date) =>
+  date.getDay() === 0 ||
+  date.getDay() === 6 ||
+  date.getHours() < 9 ||
+  date.getHours() >= 18
+
+const TimeTableCell = ({ ...restProps }) => {
+  const { startDate } = restProps
+  if (isRestTime(startDate)) {
+    return <WeekView.TimeTableCell {...restProps} className='bg-gray-100' />
+  }
+  return <WeekView.TimeTableCell {...restProps} />
+}
+
+const DayScaleCell = ({ ...restProps }) => {
+  const { startDate } = restProps
+  if (startDate.getDay() === 0 || startDate.getDay() === 6) {
+    return (
+      <WeekView.DayScaleCell
+        {...restProps}
+        className='bg-gray-100 text-red-500'
+      />
+    )
+  }
+  return <WeekView.DayScaleCell {...restProps} />
+}
+
+const SchedulerContainer = ({
+  data,
+  locale,
+  currentDate,
+  onCurrentDateChange,
+  currentViewName,
+  displayNameWeek,
+  displayNameDay,
+  onCurrentViewNameChange,
+  firstDayOfWeek,
+  excludedDays
+}) => (
+  <div className='bg-white rounded-l-lg '>
+    <Scheduler
+      data={data}
+      locale={locale}
+      firstDayOfWeek={firstDayOfWeek}
+      height={560}
+    >
+      <ViewState
+        currentDate={currentDate}
+        onCurrentDateChange={onCurrentDateChange}
+        currentViewName={currentViewName}
+        onCurrentViewNameChange={onCurrentViewNameChange}
+      />
+      <DayView displayName={displayNameDay} startDayHour={9} endDayHour={19} />
+      <WeekView
+        displayName={displayNameWeek}
+        startDayHour={8}
+        endDayHour={19}
+        timeTableCellComponent={TimeTableCell}
+        dayScaleCellComponent={DayScaleCell}
+        excludedDays={excludedDays}
+      />
+
+      <Appointments appointmentContentComponent={AppointmentContent} />
+      <Resources data={resources} />
+
+      <Toolbar flexibleSpaceComponent={FlexibleSpace} />
+      <DateNavigator />
+      <ViewSwitcher />
+    </Scheduler>
+  </div>
+)
+
+const mapStateToProps = (state) => {
+  // Recupera los elementos (Escuelas) a filtrar
+  let data = state.data.filter(
+    (dataItem) => state.schools.indexOf(dataItem.school) > -1
+  )
+  // Se captura la cadena del campo de entrada
+  const lowerCaseFilter = state.currentFilter.toLowerCase()
+  // Filtra los elementos del campo title y school
+  data = data.filter(
+    (dataItem) =>
+      dataItem.title.toLowerCase().includes(lowerCaseFilter) ||
+      dataItem.school.toLowerCase().includes(lowerCaseFilter)
+  )
+  return { ...state, data }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  onCurrentDateChange: (currentDate) =>
+    dispatch(createSchedulerAction('currentDate', currentDate)),
+  onCurrentViewNameChange: (currentViewName) =>
+    dispatch(createSchedulerAction('currentViewName', currentViewName)),
+  onSchoolsChange: (schools) =>
+    dispatch(createSchedulerAction('schools', schools))
+})
+
+const ReduxLocationSelector = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LocationSelector)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchedulerContainer)
