@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/AyudanteGrabacion/static/css/main.983ef9c5.chunk.css",
-    "main.js": "/AyudanteGrabacion/static/js/main.b4a80504.chunk.js",
-    "main.js.map": "/AyudanteGrabacion/static/js/main.b4a80504.chunk.js.map",
-    "runtime-main.js": "/AyudanteGrabacion/static/js/runtime-main.ac1390d0.js",
-    "runtime-main.js.map": "/AyudanteGrabacion/static/js/runtime-main.ac1390d0.js.map",
-    "static/js/2.f4a7651d.chunk.js": "/AyudanteGrabacion/static/js/2.f4a7651d.chunk.js",
-    "static/js/2.f4a7651d.chunk.js.map": "/AyudanteGrabacion/static/js/2.f4a7651d.chunk.js.map",
-    "static/js/3.b7a8a32e.chunk.js": "/AyudanteGrabacion/static/js/3.b7a8a32e.chunk.js",
-    "static/js/3.b7a8a32e.chunk.js.map": "/AyudanteGrabacion/static/js/3.b7a8a32e.chunk.js.map",
-    "index.html": "/AyudanteGrabacion/index.html",
-    "static/css/main.983ef9c5.chunk.css.map": "/AyudanteGrabacion/static/css/main.983ef9c5.chunk.css.map",
-    "static/js/2.f4a7651d.chunk.js.LICENSE.txt": "/AyudanteGrabacion/static/js/2.f4a7651d.chunk.js.LICENSE.txt"
+    "main.css": "/AyudanteGrabacion/client/build/static/css/main.983ef9c5.chunk.css",
+    "main.js": "/AyudanteGrabacion/client/build/static/js/main.b4a80504.chunk.js",
+    "main.js.map": "/AyudanteGrabacion/client/build/static/js/main.b4a80504.chunk.js.map",
+    "runtime-main.js": "/AyudanteGrabacion/client/build/static/js/runtime-main.f7ec45fd.js",
+    "runtime-main.js.map": "/AyudanteGrabacion/client/build/static/js/runtime-main.f7ec45fd.js.map",
+    "static/js/2.f4a7651d.chunk.js": "/AyudanteGrabacion/client/build/static/js/2.f4a7651d.chunk.js",
+    "static/js/2.f4a7651d.chunk.js.map": "/AyudanteGrabacion/client/build/static/js/2.f4a7651d.chunk.js.map",
+    "static/js/3.b7a8a32e.chunk.js": "/AyudanteGrabacion/client/build/static/js/3.b7a8a32e.chunk.js",
+    "static/js/3.b7a8a32e.chunk.js.map": "/AyudanteGrabacion/client/build/static/js/3.b7a8a32e.chunk.js.map",
+    "index.html": "/AyudanteGrabacion/client/build/index.html",
+    "static/css/main.983ef9c5.chunk.css.map": "/AyudanteGrabacion/client/build/static/css/main.983ef9c5.chunk.css.map",
+    "static/js/2.f4a7651d.chunk.js.LICENSE.txt": "/AyudanteGrabacion/client/build/static/js/2.f4a7651d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ac1390d0.js",
+    "static/js/runtime-main.f7ec45fd.js",
     "static/js/2.f4a7651d.chunk.js",
     "static/css/main.983ef9c5.chunk.css",
     "static/js/main.b4a80504.chunk.js"

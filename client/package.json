@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://c0las.github.io/AyudanteGrabacion/",
+  "homepage": "https://c0las.github.io/AyudanteGrabacion/client/build",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@devexpress/dx-react-core": "^2.7.5",
@@ -29,7 +29,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "craco start",
-    "build": "craco build && mv build RecordAssistantsProyect/",
+    "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
