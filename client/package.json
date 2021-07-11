@@ -29,7 +29,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "craco start",
-    "build": "craco build",
+    "build": "craco build && mv build RecordAssistantsProyect/",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
