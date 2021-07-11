@@ -1,5 +1,60 @@
 export const SCHEDULER_STATE_CHANGE_ACTION = 'SCHEDULER_STATE_CHANGE'
 
+export const assistant = [
+  {
+    id: 1,
+    name: 'Isabella Moreno',
+    rut: '19432989-1',
+    fono: '934367854',
+    email: 'example@gmail.com',
+    image: undefined,
+    daysAvailable: [
+      {
+        day: 'Lunes',
+        hour: ['Mañana', 'Tarde']
+      },
+      {
+        day: 'Jueves',
+        hour: ['Tarde']
+      },
+      {
+        day: 'Viernes',
+        hour: ['Tarde']
+      }
+    ]
+  },
+  {
+    id: 2,
+    name: 'Lisset Silva',
+    rut: '19432989-1',
+    fono: '934367854',
+    email: 'example@gmail.com',
+    image: undefined,
+    daysAvailable: [
+      {
+        day: 'Lunes',
+        hour: ['Mañana', 'Tarde']
+      },
+      {
+        day: 'Martes',
+        hour: ['Mañana', 'Tarde']
+      },
+      {
+        day: 'Miercoles',
+        hour: ['Mañana']
+      },
+      {
+        day: 'Jueves',
+        hour: ['Mañana', 'Tarde']
+      },
+      {
+        day: 'Viernes',
+        hour: ['Mañana']
+      }
+    ]
+  }
+]
+
 export const appointments = [
   {
     title: 'Gimnasio 1',

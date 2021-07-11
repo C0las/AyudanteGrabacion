@@ -14,7 +14,7 @@ import {
 
 import AppointmentContent from './AppointmentContent'
 import { createSchedulerAction } from '../../actions/index'
-import { SCHOOL, resources } from '../../constants/index'
+import { SCHOOL, resources, appointments } from '../../constants/index'
 
 const handleButtonClick = (schoolName, schools) => {
   if (schools.indexOf(schoolName) > -1) {
@@ -44,7 +44,7 @@ const LocationSelector = ({ onSchoolsChange, schools }) => (
           <label
             for={school}
             className='
-            inline-block text-center w-24 text-sm bg-gray-100 rounded cursor-pointer'
+            inline-block text-center w-24 text-sm bg-gray-100 rounded cursor-pointer select-none'
           >
             {school}
           </label>
@@ -107,7 +107,7 @@ const SchedulerContainer = ({
       data={data}
       locale={locale}
       firstDayOfWeek={firstDayOfWeek}
-      height={560}
+      height={520}
     >
       <ViewState
         currentDate={currentDate}

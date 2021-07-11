@@ -1,7 +1,7 @@
 import { createSchedulerAction } from '../../actions/index'
 import { connect } from 'react-redux'
 
-const Filter = ({ onCurrentFilterChange, currentFilter, classes }) => (
+const Filter = ({ onCurrentFilterChange, currentFilter }) => (
   <input
     type='text'
     placeholder='Buscar'
@@ -22,7 +22,8 @@ const mapStateToProps = (state) => {
   data = data.filter(
     (dataItem) =>
       dataItem.title.toLowerCase().includes(lowerCaseFilter) ||
-      dataItem.school.toLowerCase().includes(lowerCaseFilter)
+      dataItem.school.toLowerCase().includes(lowerCaseFilter) ||
+      dataItem.department.toLowerCase().includes(lowerCaseFilter)
   )
   return { ...state, data }
 }
