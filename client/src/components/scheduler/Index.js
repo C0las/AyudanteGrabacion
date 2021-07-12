@@ -1,6 +1,10 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { ViewState } from '@devexpress/dx-react-scheduler'
+import {
+  ViewState,
+  EditingState,
+  IntegratedEditing
+} from '@devexpress/dx-react-scheduler'
 import {
   Scheduler,
   WeekView,
@@ -9,7 +13,8 @@ import {
   Appointments,
   DayView,
   ViewSwitcher,
-  Resources
+  Resources,
+  AppointmentForm
 } from '@devexpress/dx-react-scheduler-material-ui'
 
 import AppointmentContent from './AppointmentContent'
@@ -115,17 +120,20 @@ const SchedulerContainer = ({
         currentViewName={currentViewName}
         onCurrentViewNameChange={onCurrentViewNameChange}
       />
-      <DayView displayName={displayNameDay} startDayHour={9} endDayHour={19} />
+      <EditingState />
+      <IntegratedEditing />
+      <DayView displayName={displayNameDay} startDayHour={7} endDayHour={21} />
       <WeekView
         displayName={displayNameWeek}
-        startDayHour={8}
-        endDayHour={19}
+        startDayHour={7}
+        endDayHour={21}
         timeTableCellComponent={TimeTableCell}
         dayScaleCellComponent={DayScaleCell}
         excludedDays={excludedDays}
       />
 
       <Appointments appointmentContentComponent={AppointmentContent} />
+      <AppointmentForm />
       <Resources data={resources} />
 
       <Toolbar flexibleSpaceComponent={FlexibleSpace} />
@@ -146,7 +154,7 @@ const mapStateToProps = (state) => {
   data = data.filter(
     (dataItem) =>
       dataItem.title.toLowerCase().includes(lowerCaseFilter) ||
-      dataItem.school.toLowerCase().includes(lowerCaseFilter)
+      dataItem.department.toLowerCase().includes(lowerCaseFilter)
   )
   return { ...state, data }
 }
