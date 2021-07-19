@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
 import './index.css'
 import Layout from './screen/Layout'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -8,20 +10,26 @@ import reportWebVitals from './reportWebVitals'
 import Scheduler from './screen/Scheduler'
 import Assistant from './screen/Assistant'
 
+import schedulerReducer from './reducers/schedulerReducer'
+
+const store = createStore(schedulerReducer)
+
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Layout>
-        <Switch>
-          <Route exact path='/scheduler'>
-            <Scheduler />
-          </Route>
-          <Route exact path='/assistant'>
-            <Assistant />
-          </Route>
-        </Switch>
-      </Layout>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Layout>
+          <Switch>
+            <Route exact path='/scheduler'>
+              <Scheduler />
+            </Route>
+            <Route exact path='/assistant'>
+              <Assistant />
+            </Route>
+          </Switch>
+        </Layout>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

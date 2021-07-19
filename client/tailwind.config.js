@@ -10,6 +10,14 @@ module.exports = {
       'info-light': '#3353B4'
     }),
 
+    borderColor: (theme) => ({
+      ...theme('colors'),
+      primary: '#0C203B',
+      'primary-light': '#132641',
+
+      'info-light': '#3353B4'
+    }),
+
     gradientColorStops: (theme) => ({
       ...theme('colors'),
       'info-light': '#3353B4'
