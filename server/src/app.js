@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import pkg from '../package.json'
 import scheduleRoutes from './routes/schedule.routes.js'
+import authRoutes  from './routes/auth.routes'
 const app = express()
 
 app.set('pkg', pkg);
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.use('/schedule', scheduleRoutes)
+app.use('/api/schedule', scheduleRoutes)
+app.use('/api/auth', authRoutes)
 
 export default app;
