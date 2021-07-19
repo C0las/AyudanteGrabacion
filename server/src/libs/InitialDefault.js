@@ -1,4 +1,4 @@
-import Role from "../models/Role";
+import Role from "../models/TypeUser";
 import User from "../models/TypeUser";
 
 import bcrypt from "bcryptjs";
