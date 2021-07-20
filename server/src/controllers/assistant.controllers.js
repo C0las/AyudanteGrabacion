@@ -4,6 +4,7 @@ import Day from "../models/DaysAvailable";
 export const postAssistant = async (req, res) => {
 const { Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable} = req.body;
 const dayFound = await Day.find({ Namex: { $in:DaysAvailable} }).populate("days");
+
     try {
       const newAssistant= new Assistant({
         Name,
