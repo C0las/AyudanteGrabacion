@@ -4,10 +4,10 @@ const router = Router()
 import * as scheduleControllers from '../controllers/schedule.controllers'
 import { authJwt  } from "../middlewares"
 
-router.get('/:scheduleId', scheduleControllers.getScheduleId)
+router.get('/:dayId', scheduleControllers.getScheduleId)
 router.get('/',scheduleControllers.getSchedule)
 router.post('/',scheduleControllers.postSchedule)
-router.put('/:scheduleId', scheduleControllers.updateSchedule)
-router.delete('/:scheduleId', scheduleControllers.deleteSchedule)
+router.put('/:dayId', scheduleControllers.updateSchedule)
+router.delete('/:dayId', scheduleControllers.deleteSchedule)
 
 export default router;

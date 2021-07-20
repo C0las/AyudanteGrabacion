@@ -24,7 +24,6 @@ if (req.body.roles) {
     const savedUser = await newUser.save();
     const token = jwt.sign({id: savedUser._id}, config.SECRET, {
       expiresIn: 86400
-
     })
 
     res.status(200).json({token})

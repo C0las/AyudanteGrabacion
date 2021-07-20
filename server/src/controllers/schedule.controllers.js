@@ -1,8 +1,10 @@
 import Schedule from '../models/Schedule'
+import Assistant2 from "../models/Assistant";
 
 
 export const postSchedule = async (req, res) => {
-const {title, Departament, School, Teacher,StartDate,EndDate} = req.body;
+const {title, Departament, School, Teacher,StartDate,EndDate,Assistant} = req.body;
+const AssistantFound = await Assistant2.find({ Name: { $in:Assistant} });
   
     try {
       const newShedule = new Schedule({
@@ -11,14 +13,27 @@ const {title, Departament, School, Teacher,StartDate,EndDate} = req.body;
         School,
         Teacher,
         StartDate,
-        EndDate
+        EndDate,
+        Assistant: AssistantFound.map((assistant) => assistant._id),
       });
   
       const ScheduleSaved = await newShedule.save();
       res.status(201).json(ScheduleSaved);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+
+      return res.status(200).json({
+        _id: ScheduleSaved._id,
+        title: ScheduleSaved.title,
+        Departament: ScheduleSaved.Departament,
+        School: ScheduleSaved.School,
+        Teacher: ScheduleSaved.Teacher,
+        StartDate: ScheduleSaved.StartDate,
+        EndDate: ScheduleSaved.EndDate,
+        Assistant: ScheduleSaved.Assistant,
+      });
+
+      
     }
   };
 

@@ -6,8 +6,17 @@ const SheduleSchema = new Schema({
     School: String,
     Teacher: String,
     StartDate: Date,
-    EndDate: Date
-}, {
+    EndDate: Date,
+    Assistant: [
+        {
+          ref: "assistant",
+          type: Schema.Types.ObjectId,
+        
+        },
+      ], 
+}, 
+
+{
     timestamps: true,
     versionKey: false
 })
