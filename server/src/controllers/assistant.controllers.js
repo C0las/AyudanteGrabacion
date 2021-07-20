@@ -1,19 +1,34 @@
-import Assistant from '../models/Assistant'
-
+import Assistant from '../models/Assistant';
+import Day from "../models/DaysAvailable";
 
 export const postAssistant = async (req, res) => {
 const { Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable} = req.body;
-  
+const dayFound = await Day.find({ Namex: { $in:DaysAvailable} }).populate("days");
     try {
       const newAssistant= new Assistant({
-        Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable
+        Name,
+        Rut, 
+        Telefono , 
+        Email, 
+        HoursAvailable, 
+        DaysAvailable: dayFound.map((days) => days._id),
       });
       const AssistantSaved = await newAssistant.save();
       res.status(201).json(AssistantSaved);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+    
+      return res.status(200).json({
+        _id: AssistantSaved._id,
+        Name: AssistantSaved.Name,
+        Rut: AssistantSaved.Rut,
+        Telefono: AssistantSaved.Telefono,
+        HoursAvailable: AssistantSaved.HoursAvailable,
+        DaysAvailable: AssistantSaved.DaysAvailable,
+      });
+      
     }
+    console.log(dayFound)
   };
 
 export const getAssistant= async (req, res) =>{

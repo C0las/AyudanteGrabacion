@@ -1,10 +1,10 @@
 import { Schema, model } from "mongoose";
 
 const DaySchema = new Schema({
-    DaysAvaible: String
+    Namex: String,
 }, {
     timestamps: true,
     versionKey: false
 })
 
-export default model('DayAviable',DaySchema)
+export default model('days',DaySchema)
