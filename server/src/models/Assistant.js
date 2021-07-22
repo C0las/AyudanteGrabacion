@@ -7,6 +7,17 @@ const AssistantSchema = new Schema(
     Telefono: String,
     Email: String,
     HoursAvailable:String,
+
+    address:{
+      street:String,
+      city: String,
+    },
+    paymenDetaitls: {
+      acountNumber:String,
+      backname:String,
+      accountType: String,
+    },
+
     DaysAvailable:[
         {
           ref: "days",

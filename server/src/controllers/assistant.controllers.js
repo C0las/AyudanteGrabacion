@@ -27,7 +27,7 @@ const dayFound = await Day.find({ Namex: { $in:DaysAvailable} }).populate("days"
         HoursAvailable: AssistantSaved.HoursAvailable,
         DaysAvailable: AssistantSaved.DaysAvailable,
       });
-      
+
     }
     console.log(dayFound)
   };

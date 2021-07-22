@@ -5,6 +5,7 @@ import{createRoles} from './libs/InitialDefault'
 import{createDay} from './libs/InitialDefaultDays'
 import scheduleRoutes from './routes/schedule.routes.js'
 import hourRoutes from './routes/HourAvaible.routes'
+import dayRoutes from './routes/DayAvailable.routes'
 import assistantRoutes from './routes/Assistant.routes'
 import reportRoutes from './routes/report.routes'
 import authRoutes  from './routes/auth.routes'
@@ -33,6 +34,6 @@ app.use('/api/user', userRoutes)
 app.use('/api/hour', hourRoutes)
 app.use('/api/assistant', assistantRoutes)
 app.use('/api/report', reportRoutes)
-
+app.use('/api/day', dayRoutes)
 
 export default app;

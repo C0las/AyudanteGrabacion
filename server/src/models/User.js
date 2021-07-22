@@ -15,6 +15,14 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    assistant: [
+      {
+        ref: "assistant",
+        type: Schema.Types.ObjectId,
+      
+      },
+    ],
+
     roles: [
       {
         ref: "roles",
