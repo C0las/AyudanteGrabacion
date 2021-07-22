@@ -4,7 +4,7 @@ import Assistant2 from "../models/Assistant";
 
 export const postSchedule = async (req, res) => {
 const {title, Departament, School, Teacher,StartDate,EndDate,Assistant} = req.body;
-const AssistantFound = await Assistant2.find({ Name: { $in:Assistant} }).populate("assistant");
+const AssistantFound = await Assistant2.find({ _id: { $in:Assistant} }).populate("assistant");
   
     try {
       const newShedule = new Schedule({

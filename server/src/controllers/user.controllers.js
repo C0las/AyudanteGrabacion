@@ -1,11 +1,13 @@
 import User from "../models/User";
 import Role from "../models/TypeUser";
+import assist from "../models/Assistant";
 
 export const createUser = async (req, res) => {
   try {
-    const { username, email, password, roles } = req.body;
+    const { username, email, password, roles,assistant } = req.body;
 
     const rolesFound = await Role.find({ name: { $in: roles } });
+    const assistantFound = await assist.find({ _id: { $in: assistant } });
 
 
     const user = new User({
@@ -13,6 +15,8 @@ export const createUser = async (req, res) => {
       email,
       password,
       roles: rolesFound.map((role) => role._id),
+      assistant: assistantFound.map((assistant) => assistant._id),
+
     });
 
     user.password = await User.encryptPassword(user.password);
@@ -24,6 +28,7 @@ export const createUser = async (req, res) => {
       username: savedUser.username,
       email: savedUser.email,
       roles: savedUser.roles,
+      assistant: savedUser.assistant,
     });
   } catch (error) {
     console.error(error);
