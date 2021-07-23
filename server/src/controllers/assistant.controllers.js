@@ -2,8 +2,9 @@ import Assistant from '../models/Assistant';
 import Day from "../models/DaysAvailable";
 
 export const postAssistant = async (req, res) => {
-const { Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable} = req.body;
-const dayFound = await Day.find({ Namex: { $in:DaysAvailable} }).populate("days");
+const { Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable, address,paymenDetaitls} = req.body;
+const dayFound = await Day.find({ Namex: { $in:DaysAvailable} });
+
 
     try {
       const newAssistant= new Assistant({
@@ -13,12 +14,16 @@ const dayFound = await Day.find({ Namex: { $in:DaysAvailable} }).populate("days"
         Email, 
         HoursAvailable, 
         DaysAvailable: dayFound.map((days) => days._id),
+        address,
+        paymenDetaitls,
       });
+
       const AssistantSaved = await newAssistant.save();
       res.status(201).json(AssistantSaved);
     } catch (error) {
       console.log(error);
-    
+      res.status(500).json(error);
+
       return res.status(200).json({
         _id: AssistantSaved._id,
         Name: AssistantSaved.Name,
@@ -26,6 +31,8 @@ const dayFound = await Day.find({ Namex: { $in:DaysAvailable} }).populate("days"
         Telefono: AssistantSaved.Telefono,
         HoursAvailable: AssistantSaved.HoursAvailable,
         DaysAvailable: AssistantSaved.DaysAvailable,
+        address: AssistantSaved.address,
+        paymenDetaitls: AssistantSaved.paymenDetaitls,
       });
 
     }
