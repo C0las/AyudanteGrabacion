@@ -17,6 +17,10 @@ const AssistantSchema = new Schema(
       backname:String,
       accountType: String,
     },
+    confirmationTurn: [{
+      className :String,
+      stateConfirmation: String,
+    }],
 
     DaysAvailable:[
         {

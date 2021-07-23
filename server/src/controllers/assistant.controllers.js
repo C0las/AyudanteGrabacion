@@ -1,9 +1,11 @@
 import Assistant from '../models/Assistant';
 import Day from "../models/DaysAvailable";
+import Shedule from "../models/Schedule";
 
 export const postAssistant = async (req, res) => {
-const { Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable, address,paymenDetaitls} = req.body;
+const { Name, Rut, Telefono , Email, HoursAvailable, DaysAvailable, address,paymenDetaitls,confirmationTurn}= req.body;
 const dayFound = await Day.find({ Namex: { $in:DaysAvailable} });
+
 
 
     try {
@@ -16,6 +18,7 @@ const dayFound = await Day.find({ Namex: { $in:DaysAvailable} });
         DaysAvailable: dayFound.map((days) => days._id),
         address,
         paymenDetaitls,
+        confirmationTurn,
       });
 
       const AssistantSaved = await newAssistant.save();
@@ -33,6 +36,7 @@ const dayFound = await Day.find({ Namex: { $in:DaysAvailable} });
         DaysAvailable: AssistantSaved.DaysAvailable,
         address: AssistantSaved.address,
         paymenDetaitls: AssistantSaved.paymenDetaitls,
+        confirmationTurn: AssistantSaved.confirmationTurn,
       });
 
     }

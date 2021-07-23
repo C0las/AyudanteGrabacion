@@ -6,7 +6,6 @@ export const getDays= async (req, res) =>{
     return res.json(day);
 }
 
-
 export const getDaysId= async (req, res) =>{
     const { dayId } = req.params;
     const day = await HourAvaible.findById(dayId);

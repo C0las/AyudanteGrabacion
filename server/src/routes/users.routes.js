@@ -2,6 +2,7 @@ import { Router } from "express";
 const router = Router();
 
 import * as authCtrl from "../controllers/auth.controllers";
+import * as userctrl from "../controllers/user.controllers";
 import { verifySignup } from "../middlewares";
 
 router.use((req, res, next) => {
@@ -17,7 +18,7 @@ router.post(
   [verifySignup.checkDuplicateUsernameOrEmail, verifySignup.checkRolesExisted],
   authCtrl.signUp
 );
-
+router.get("/", userctrl.getUser);
 router.post("/signin", authCtrl.signin);
 
 export default router;
