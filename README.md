@@ -1,6 +1,8 @@
 # Programación de Horarios
 _Consiste en una plataforma web **MERN STACK**, para la gestión de horarios de clases y turnos._
 ![](https://i.ibb.co/f14KPCP/Scheduler.png)
+
+**Live App Demo:** https://c0las.github.io/AyudanteGrabacion/client/build/
 ## Comenzando 🚀
 _Para comenzar, levante el cliente y el servidor con npm start_
 ### Pre-requisitos 📋
