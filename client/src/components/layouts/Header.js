@@ -1,14 +1,10 @@
-import React from 'react'
-
-import { SearchIcon } from '@heroicons/react/solid'
 import Filter from '../common/Filter'
 
-function Header() {
+const Header = (props) => {
   return (
     <div className='flex items-center justify-between bg-primary-light w-full h-20 p-10'>
       <div className='flex items-center justify-start w-2/5'>
-        <Filter />
-        <SearchIcon className='absolute text-gray-500 ml-3 h-5 w-5' />
+        <Filter term={props.term} searchKeyword={props.searchKeyword} />
       </div>
 
       <div className=' flex items-center justify-center w-1/6 gap-5'>

@@ -18,8 +18,8 @@ import {
 } from '@devexpress/dx-react-scheduler-material-ui'
 
 import AppointmentContent from './AppointmentContent'
-import { createSchedulerAction } from '../../actions/index'
-import { SCHOOL, resources, appointments } from '../../constants/index'
+import { createSchedulerAction } from '../../redux/actions/index'
+import { SCHOOL, resources, appointments } from '../../redux/constants/index'
 
 const handleButtonClick = (schoolName, schools) => {
   if (schools.indexOf(schoolName) > -1) {
@@ -144,19 +144,20 @@ const SchedulerContainer = ({
 )
 
 const mapStateToProps = (state) => {
+  console.log(state.allScheduler)
   // Recupera los elementos (Escuelas) a filtrar
-  let data = state.data.filter(
-    (dataItem) => state.schools.indexOf(dataItem.school) > -1
+  let data = state.allScheduler.data.filter(
+    (dataItem) => state.allScheduler.schools.indexOf(dataItem.school) > -1
   )
   // Se captura la cadena del campo de entrada
-  const lowerCaseFilter = state.currentFilter.toLowerCase()
+  const lowerCaseFilter = state.allScheduler.currentFilter.toLowerCase()
   // Filtra los elementos del campo title y school
   data = data.filter(
     (dataItem) =>
       dataItem.title.toLowerCase().includes(lowerCaseFilter) ||
       dataItem.department.toLowerCase().includes(lowerCaseFilter)
   )
-  return { ...state, data }
+  return { ...state.allScheduler, data }
 }
 
 const mapDispatchToProps = (dispatch) => ({
