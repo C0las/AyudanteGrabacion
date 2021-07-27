@@ -1,36 +1,48 @@
-import { createSchedulerAction } from '../../actions/index'
-import { connect } from 'react-redux'
+import { useRef, useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  fetchAssitants,
+  setAssistants
+} from '../../redux/actions/assistantActions'
+import { SearchIcon } from '@heroicons/react/solid'
 
-const Filter = ({ onCurrentFilterChange, currentFilter }) => (
-  <input
-    type='text'
-    placeholder='Buscar'
-    className='w-full h-9 pl-10 outline-none rounded-2xl bg-transparent border-2 place-gray-500 text-sm text-gray-100 border-gray-500'
-    value={currentFilter}
-    onChange={({ target }) => onCurrentFilterChange(target.value)}
-  />
-)
+const Filter = () => {
+  const [searchTerm, setSearchTerm] = useState('')
 
-const mapStateToProps = (state) => {
-  // Recupera los elementos (Escuelas) a filtrar
-  let data = state.data.filter(
-    (dataItem) => state.schools.indexOf(dataItem.school) > -1
+  const inputEl = useRef('')
+  const assistants = useSelector((state) => state.allAssistants.assistants)
+  const dispatch = useDispatch()
+  const searchHandler = (searchTerm) => {
+    setSearchTerm(searchTerm)
+    if (searchTerm !== '') {
+      const newAssistantList = assistants.filter((assistant) => {
+        const data =
+          assistant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          assistant.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          assistant.rut.toLowerCase().includes(searchTerm.toLowerCase())
+
+        return data
+      })
+
+      dispatch(setAssistants(newAssistantList))
+    } else {
+      dispatch(fetchAssitants)
+    }
+  }
+
+  return (
+    <>
+      <input
+        ref={inputEl}
+        type='text'
+        placeholder='Buscar'
+        className='w-full h-9 pl-10 outline-none rounded-2xl bg-transparent border-2 place-gray-500 text-sm text-gray-100 border-gray-500'
+        value={searchTerm}
+        onChange={(e) => searchHandler(e.target.value)}
+      />
+      <SearchIcon className='absolute text-gray-500 ml-3 h-5 w-5' />
+    </>
   )
-  // Se captura la cadena del campo de entrada
-  const lowerCaseFilter = state.currentFilter.toLowerCase()
-  // Filtra los elementos del campo title y school
-  data = data.filter(
-    (dataItem) =>
-      dataItem.title.toLowerCase().includes(lowerCaseFilter) ||
-      dataItem.school.toLowerCase().includes(lowerCaseFilter) ||
-      dataItem.department.toLowerCase().includes(lowerCaseFilter)
-  )
-  return { ...state, data }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onCurrentFilterChange: (currentFilter) =>
-    dispatch(createSchedulerAction('currentFilter', currentFilter))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default Filter

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
-import { assistant } from '../../constants/index'
+import { assistant } from '../../redux/constants/index'
 
 function Sidebar() {
   const [viewAssitant, setViewAssistant] = useState('Lunes')
