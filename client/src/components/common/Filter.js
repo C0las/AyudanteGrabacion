@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import {
   fetchAssitants,
   setAssistants
@@ -7,26 +8,38 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 
 const Filter = () => {
+  const location = useLocation()
   const [searchTerm, setSearchTerm] = useState('')
-
   const inputEl = useRef('')
   const assistants = useSelector((state) => state.allAssistants.assistants)
   const dispatch = useDispatch()
+
   const searchHandler = (searchTerm) => {
     setSearchTerm(searchTerm)
-    if (searchTerm !== '') {
-      const newAssistantList = assistants.filter((assistant) => {
-        const data =
-          assistant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          assistant.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          assistant.rut.toLowerCase().includes(searchTerm.toLowerCase())
 
-        return data
-      })
+    switch (location.pathname) {
+      case '/scheduler':
+        break
+      case '/assistant':
+        if (searchTerm !== '') {
+          const newAssistantList = assistants.filter((assistant) => {
+            const data =
+              assistant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              assistant.lastName
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()) ||
+              assistant.rut.toLowerCase().includes(searchTerm.toLowerCase())
 
-      dispatch(setAssistants(newAssistantList))
-    } else {
-      dispatch(fetchAssitants)
+            return data
+          })
+          dispatch(setAssistants(newAssistantList))
+        } else {
+          dispatch(fetchAssitants)
+        }
+        break
+
+      default:
+        break
     }
   }
 

@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className='flex flex-col items-center justify-start bg-primary w-1/6 p-3'>
       <div className='flex flex-col w-full mt-4 gap-5'>
         <NavLink
-          to='/scheduler'
+          to='/schedule'
           activeClassName='from-blue-500 to-info-light shadow -translate-y-1 scale-105'
           className='flex items-center bg-gradient-to-r rounded-lg w-full h-20 p-2 hover:from-blue-500 hover:to-info-light hover:shadow transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105'
         >

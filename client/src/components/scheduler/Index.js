@@ -144,7 +144,6 @@ const SchedulerContainer = ({
 )
 
 const mapStateToProps = (state) => {
-  console.log(state.allScheduler)
   // Recupera los elementos (Escuelas) a filtrar
   let data = state.allScheduler.data.filter(
     (dataItem) => state.allScheduler.schools.indexOf(dataItem.school) > -1

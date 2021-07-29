@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
-import { Link } from 'react-router-dom'
 import { assistant } from '../../redux/constants/index'
 
 function Sidebar() {

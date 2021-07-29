@@ -1,4 +1,45 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Router as RouterHistory } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import Router from '../router'
+import history from '../utils/history'
+import store from '../redux/store'
+
+import useNetwork from '../hooks/useNetwork'
+
+import { Button, Result } from 'antd'
+
+function App() {
+  const { isOnline: isNetwork } = useNetwork()
+
+  if (!isNetwork)
+    return (
+      <>
+        <Result
+          status='404'
+          title='No Internet Connection'
+          subTitle='Check your Internet Connection or your network.'
+          extra={
+            <Button href='/' type='primary'>
+              Try Again
+            </Button>
+          }
+        />
+      </>
+    )
+  else {
+    return (
+      <RouterHistory history={history}>
+        <Provider store={store}>
+          <Router />
+        </Provider>
+      </RouterHistory>
+    )
+  }
+}
+
+export default App
+
+/*import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import api from '../api/assistants'
@@ -7,6 +48,7 @@ import Assistant from './views/Assistant'
 import Scheduler from './views/Scheduler'
 import AssistantDetail from './views/AssistantDetail'
 import AddAssistant from './assistant/AddAssistant'
+import Login from './views/Login'
 import { setAssistants } from '../redux/actions/assistantActions'
 
 function App() {
@@ -24,12 +66,16 @@ function App() {
 
   return (
     <Router>
-      {/* Contenedor de la vista principal */}
+      <Route exact path='/' component={Login} />
       <Main>
         <Switch>
-          <Route path='/scheduler' component={Scheduler} />
-          <Route path='/assistant' component={Assistant} />
-          <Route path='/assistantDetail/:id' component={AssistantDetail} />
+          <Route exact path='/scheduler' component={Scheduler} />
+          <Route exact path='/assistant' component={Assistant} />
+          <Route
+            exact
+            path='/assistantDetail/:id'
+            component={AssistantDetail}
+          />
           <Route
             path='/add'
             render={(props) => (
@@ -45,4 +91,4 @@ function App() {
   )
 }
 
-export default App
+export default App*/
