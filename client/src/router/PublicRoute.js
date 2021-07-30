@@ -13,6 +13,8 @@ const PublicRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) =>
         authService.token.get() ? (
+          <Redirect to='/' />
+        ) : (
           <motion.div
             initial={{ x: 200 }}
             animate={{ x: 0 }}
@@ -20,8 +22,6 @@ const PublicRoute = ({ component: Component, ...rest }) => {
           >
             <Component {...props} />
           </motion.div>
-        ) : (
-          <Redirect to='/' />
         )
       }
     />

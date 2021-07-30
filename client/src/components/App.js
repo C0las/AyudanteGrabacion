@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Router as RouterHistory } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Router from '../router'
@@ -51,19 +50,6 @@ import AssistantDetail from './views/AssistantDetail'
 import AddAssistant from './assistant/AddAssistant'
 import Login from './views/Login'
 import { setAssistants } from '../redux/actions/assistantActions'
-=======
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
-import api from "../api/assistants";
-import Main from "./layouts/Main";
-import Assistant from "./views/Assistant";
-import Scheduler from "./views/Scheduler";
-import Navbar from "./viewsAssistant/navbar/Navbar";
-import AssistantDetail from "./views/AssistantDetail";
-import AddAssistant from "./assistant/AddAssistant";
-import { setAssistants } from "../redux/actions/assistantActions";
->>>>>>> 4ef9a3f2d927a5761791847277938dea4d055c80
 
 function App() {
   const dispatch = useDispatch();
@@ -80,7 +66,6 @@ function App() {
 
   return (
     <Router>
-<<<<<<< HEAD
       <Route exact path='/' component={Login} />
       <Main>
         <Switch>
@@ -91,15 +76,6 @@ function App() {
             path='/assistantDetail/:id'
             component={AssistantDetail}
           />
-=======
-      {/* Contenedor de la vista principal */}
-
-      <Main>
-        <Switch>
-          <Route path="/scheduler" component={Scheduler} />
-          <Route path="/assistant" component={Assistant} />
-          <Route path="/assistantDetail/:id" component={AssistantDetail} />
->>>>>>> 4ef9a3f2d927a5761791847277938dea4d055c80
           <Route
             path="/add"
             render={(props) => (
@@ -115,8 +91,4 @@ function App() {
   );
 }
 
-<<<<<<< HEAD
 export default App*/
-=======
-export default App;
->>>>>>> 4ef9a3f2d927a5761791847277938dea4d055c80
