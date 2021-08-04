@@ -1,4 +1,5 @@
 import Filter from '../common/Filter'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
   return (
@@ -7,7 +8,10 @@ const Header = (props) => {
         <Filter term={props.term} searchKeyword={props.searchKeyword} />
       </div>
 
-      <div className=' flex items-center justify-center w-1/6 gap-5'>
+      <Link
+        to='/logout'
+        className='flex items-center justify-center w-1/6 gap-5'
+      >
         <span className='text-white text-sm font-normal'>
           ¡Hola, <span className='text-white font-bold'>Sara Moro!</span>
         </span>
@@ -16,7 +20,7 @@ const Header = (props) => {
           src='https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
           alt=''
         />
-      </div>
+      </Link>
     </div>
   )
 }

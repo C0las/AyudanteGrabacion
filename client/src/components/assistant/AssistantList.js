@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import CardAssistant from './CardAssistant'
 import { setAssistants } from '../../redux/actions/assistantActions'
 import api from '../../api/assistants'
+import { motion } from 'framer-motion'
 
 const AssistantList = () => {
   const assistants = useSelector((state) => state.allAssistants.assistants)
@@ -16,7 +17,7 @@ const AssistantList = () => {
     dispatch(setAssistants(newAssistantList))
   }
 
-  const renderAssistant = assistants.map((assistant) => {
+  const renderAssistant = assistants.map((assistant, index) => {
     const img = (assistant) => {
       const name = assistant.name.replace(/[a-z]/g, '').substr(-3, 2)
       const lastName = assistant.lastName.replace(/[a-z]/g, '').substr(-3, 2)
@@ -37,12 +38,15 @@ const AssistantList = () => {
       return name + ' ' + lastName
     }
 
+    console.log(img(assistant))
+
     return (
       <CardAssistant
         assistant={assistant}
         name={name(assistant)}
         img={img(assistant)}
-        clickHanlder={removeAssistantHandler}
+        clickHandler={removeAssistantHandler}
+        index={index}
       />
     )
   })

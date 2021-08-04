@@ -1,11 +1,11 @@
-import React from 'react'
+import { lazy, Suspense } from 'react'
 
-import Sheduler from '../scheduler/Index'
-import Sidebar from '../scheduler/Sidebar'
+const Sheduler = lazy(() => import('../scheduler/Index'))
+const Sidebar = lazy(() => import('../scheduler/Sidebar'))
 
 function Scheduler() {
   return (
-    <div className='flex flex-row h-screen overflow-hidden'>
+    <div className='flex flex-row'>
       <Sheduler />
       <Sidebar />
     </div>

@@ -4,7 +4,7 @@ import { ActionTypes } from '../constants/action-types'
 // Devuelve todos los assistentes de la api
 export const fetchAssitants = async (dispatch) => {
   try {
-    let data = await api.get('/').then(({ data }) => data)
+    let data = await api.get('assistant').then(({ data }) => data)
     dispatch({ type: ActionTypes.FETCH_ASSISTANTS, payload: data })
   } catch (error) {
     console.log(error)

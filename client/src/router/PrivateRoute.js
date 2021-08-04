@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   }
   return (
     // Show the component only when the admin is logged in
-    // Otherwise, redirect the admin to /signin page
+    // Otherwise, redirect the admin to /signing page
 
     <Route
       {...rest}

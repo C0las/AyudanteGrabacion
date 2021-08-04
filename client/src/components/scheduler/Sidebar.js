@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { assistant } from '../../redux/constants/index'
+import { motion } from 'framer-motion'
 
 function Sidebar() {
   const [viewAssitant, setViewAssistant] = useState('Lunes')
@@ -32,13 +33,18 @@ function Sidebar() {
     }
   }
 
-  const contentMain = (assistant) => {
+  const contentMain = (assistant, index) => {
     const img = assistant.name.replace(/[a-z]/g, '')
     const rut = assistant.rut.replace(/(\d{2})(\d{3})(\d{3})/, '$1.$2.$3')
     const fono = assistant.fono.replace(/(\d{1})/, '+56 $1 ')
 
     return (
-      <div className='flex items-center justify-center border-2 border-gray-200 shadow-md w-52 rounded-lg gap-4 p-3'>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 1] }}
+        transition={{ duration: 0.5, delay: index / 5 }}
+        className='flex items-center justify-center border-2 border-gray-200 shadow-md w-52 rounded-lg gap-4 p-3'
+      >
         {assistant.image === undefined ? (
           <div className='flex items-center justify-center rounded-full w-12 h-12 bg-primary'>
             <span className='text-lg font-bold text-white'>{img}</span>
@@ -78,7 +84,7 @@ function Sidebar() {
               )
             })}
         </div>
-      </div>
+      </motion.div>
     )
   }
 
@@ -130,7 +136,7 @@ function Sidebar() {
                 }
               })
               .sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
-              .map((assistant) => contentMain(assistant))}
+              .map((assistant, index) => contentMain(assistant, index))}
       </div>
     </div>
   )

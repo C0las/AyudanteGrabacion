@@ -1,16 +1,26 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+import { createLogger } from 'redux-logger'
+
 import reducers from './reducers/index'
+import storePersist from './storePersist'
 
-/*
- * Se crea un 'store' con el `createStore`
- * y se utiliza `counterReducer` for the update logic
- */
-const composeEnhancers =
-  (typeof window !== 'undefined' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose
+const logger = createLogger()
+let middleware = [thunk]
 
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
+let configStore = applyMiddleware(...middleware)
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+if (process.env.NODE_ENV === 'development') {
+  middleware = [...middleware, logger]
+  configStore = composeEnhancers(applyMiddleware(...middleware))
+}
+
+const initialState = storePersist.get('auth')
+  ? { auth: storePersist.get('auth') }
+  : {}
+
+const store = createStore(reducers, initialState, configStore)
 
 export default store

@@ -14,6 +14,7 @@ export const login = async (loginAdminData) => {
       loginAdminData
     )
     token.set(response.data.result.token)
+    console.log(response.data.result)
     return successHandler(response)
   } catch (error) {
     return errorHandler(error)
@@ -23,6 +24,12 @@ export const login = async (loginAdminData) => {
 export const logout = () => {
   token.remove()
   storePersist.clear()
+}
+
+export const isLogin = {
+  get: () => {
+    return getCookie('auth')
+  }
 }
 
 export const token = {

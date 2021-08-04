@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import AuthRouter from './AuthRouter'
-import AppRouter from './AppRouter'
+import AppRouterAdmin from './AppRouterAdmin'
+import AppRouterAssistant from './AppRouterAssistant'
 
 import Main from '../components/layouts/Main'
-import * as authService from '../services/auth/index'
-
 import { useSelector } from 'react-redux'
-import { selectAuth } from '../redux/selectors/auth'
+import { selectAuth, selectCurrentAdmin } from '../redux/selectors/auth'
 
 export default function Router() {
-  // const { isLoggedIn } = useSelector(selectAuth)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { isLoggedIn } = useSelector(selectAuth)
+  const selectRole = useSelector(selectCurrentAdmin)
+  const role = isLoggedIn ? selectRole.role[0].name : ''
 
   useEffect(() => {
-    if (authService.token.get() !== null) {
-      setIsLoggedIn(true)
-    } else {
-      setIsLoggedIn(false)
-    }
-
     console.log('isLoggedIn : ', isLoggedIn)
   }, [isLoggedIn])
 
-  console.log(authService.token.get())
   if (isLoggedIn === false) return <AuthRouter />
+  else if (role === 'admin')
+    return (
+      <Main role={role}>
+        <AppRouterAdmin />
+      </Main>
+    )
   else
     return (
-      <Main>
-        <AppRouter />
+      <Main role={role}>
+        <AppRouterAssistant />
       </Main>
     )
 }
