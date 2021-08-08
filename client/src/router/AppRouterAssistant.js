@@ -1,46 +1,50 @@
-import { lazy, Suspense } from 'react'
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import PrivateRoute from './PrivateRoute'
-import PublicRoute from './PublicRoute'
-import PageLoader from '../components/common/PageLoader'
+import { lazy, Suspense } from "react";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import PageLoader from "../components/common/PageLoader";
 
 // Ayudante
-const Home = lazy(() => import('../components/views/assistente/Home'))
+const Home = lazy(() => import("../components/views/assistente/Home"));
 const AssistantPerfil = lazy(() =>
-  import('../components/views/assistente/Details')
-)
-const Report = lazy(() => import('../components/views/assistente/Report'))
-const Logout = lazy(() => import('../components/views/Logout'))
-const NotFound = lazy(() => import('../components/views/NotFound'))
+  import("../components/views/assistente/Details")
+);
+const Report = lazy(() => import("../components/views/assistente/Report"));
+const PaymentDetails = lazy(() =>
+  import("../components/views/assistente/PaymentDetails")
+);
+const Logout = lazy(() => import("../components/views/Logout"));
+const NotFound = lazy(() => import("../components/views/NotFound"));
 
 export default function AppRouterAssistant() {
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={false}>
         <Switch location={location} key={location.pathname}>
-          <PrivateRoute exact path='/'>
-            <Redirect to='/schedule' />
-          </PrivateRoute>
-
-          <PrivateRoute path='/home' component={Home} exact />
+          <PrivateRoute path="/" component={Home} exact />
           <PrivateRoute
             component={AssistantPerfil}
-            path='/assistantDetail/:id'
+            path="/assistantDetail"
             exact
           />
-          <PrivateRoute component={Report} path='/report' exact />
-          <PrivateRoute component={Logout} path='/logout' exact />
-          <PublicRoute path='/login' render={() => <Redirect to='/' />} />
+          <PrivateRoute
+            path="/PaymentDetails"
+            component={PaymentDetails}
+            exact
+          />
+          <PrivateRoute component={Report} path="/report/:id" exact />
+          <PrivateRoute component={Logout} path="/logout" exact />
+          <PublicRoute path="/login" render={() => <Redirect to="/" />} />
           <Route
-            path='*'
+            path="*"
             component={NotFound}
-            render={() => <Redirect to='/notfound' />}
+            render={() => <Redirect to="/notfound" />}
           />
         </Switch>
       </AnimatePresence>
     </Suspense>
-  )
+  );
 }
