@@ -16,14 +16,14 @@ import {
   Resources,
   AppointmentForm
 } from '@devexpress/dx-react-scheduler-material-ui'
-
-import AppointmentContent from './AppointmentContent'
+import { format } from 'date-fns'
+import AppointmentContent from '../common/AppointmentContent'
 import { setSchedulers } from '../../redux/actions/schedulerActions'
 
 function SchedulerContainer() {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.allScheduler.scheduler)
-  const school = useSelector((state) => state.allScheduler.schools)
+  const schools = useSelector((state) => state.allScheduler.schools)
 
   console.log(data)
 
@@ -36,13 +36,10 @@ function SchedulerContainer() {
     return nextSchools
   }
 
-  const onSchoolsChange = () => {
-    dispatch(setSchedulers())
-  }
-
-  const LocationSelector = (onSchoolsChange, schools) => (
+  const LocationSelector = (props) => (
     <div className='flex items-center gap-2'>
-      {school.map((school) => {
+      {props.schools.map((school) => {
+        console.log(school)
         return (
           <>
             <input
@@ -51,7 +48,7 @@ function SchedulerContainer() {
               id={school}
               defaultChecked={true}
               onClick={() => {
-                onSchoolsChange(handleButtonClick(school, schools))
+                dispatch(handleButtonClick(school, schools))
               }}
               key={school}
               className=''
@@ -74,7 +71,7 @@ function SchedulerContainer() {
       {...restProps}
       className='flex flex-row items-center justify-center m-auto gap-2'
     >
-      {/*<ReduxLocationSelector />*/}
+      <LocationSelector schools={schools} />
     </Toolbar.FlexibleSpace>
   )
 
@@ -131,7 +128,7 @@ function SchedulerContainer() {
     <div className='bg-white rounded-l-lg '>
       <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1} height={520}>
         <ViewState currentDate='2021-06-28' />
-        <DayView startDayHour={9} endDayHour={19} />
+        <DayView startDayHour={9} endDayHour={19} excludedDays={[0, 6]} />
         <WeekView
           displayName='Semanas'
           startDayHour={7}

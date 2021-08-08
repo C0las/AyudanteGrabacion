@@ -17,3 +17,10 @@ export const setSchedulers = (schedulers) => {
     payload: schedulers
   }
 }
+
+export const setCurrentDate = (currentDate) => {
+  return {
+    type: ActionTypes.CURRENT_DATE_SCHEDULER,
+    payload: currentDate
+  }
+}

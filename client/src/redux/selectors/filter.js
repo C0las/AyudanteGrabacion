@@ -14,3 +14,15 @@ export const filterAssistantsSelector = createSelector(
     return assistantMap
   }
 )
+
+export const filterAssistantSchedulerSelector = createSelector(
+  (state) => state.allScheduler.scheduler,
+  (state) => state.auth.current,
+  (scheduler, current) => {
+    let data = scheduler.filter((scheduler) => {
+      return scheduler.assistant.includes(current.assistant)
+    })
+
+    return data
+  }
+)

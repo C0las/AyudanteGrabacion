@@ -8,7 +8,7 @@ const Main = (props) => {
     return (
       <div className='relative flex flex-row h-screen bg-gray-100 overflow-hidden'>
         <AssistantNavbar />
-        <div className='flex flex-col overflow-auto w-full'>
+        <div className='flex flex-col overflow-hidden w-full h-screen'>
           {props.children}
         </div>
       </div>

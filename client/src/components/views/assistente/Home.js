@@ -1,52 +1,81 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { TrashIcon, PencilIcon } from '@heroicons/react/solid'
-import { useSelector } from 'react-redux'
-import { idAssistant } from '../../../redux/selectors/auth'
+import { useEffect } from 'react'
+import { ViewState } from '@devexpress/dx-react-scheduler'
+import {
+  Scheduler,
+  WeekView,
+  Toolbar,
+  DateNavigator,
+  Appointments,
+  Resources,
+  CurrentTimeIndicator
+} from '@devexpress/dx-react-scheduler-material-ui'
+import { format } from 'date-fns'
+import { useSelector, useDispatch } from 'react-redux'
+import { filterAssistantSchedulerSelector } from '../../../redux/selectors/filter'
+import {
+  fetchSchedulers,
+  setCurrentDate
+} from '../../../redux/actions/schedulerActions'
 
 export default function Home() {
-  const assistant_id = useSelector(idAssistant)
-  console.log(assistant_id)
+  const dispatch = useDispatch()
+  const currentDate = useSelector((state) => state.allScheduler.currentDate)
+  const data = useSelector(filterAssistantSchedulerSelector)
+
+  useEffect(() => {
+    dispatch(fetchSchedulers)
+  }, [dispatch])
+
+  const FlexibleSpace = ({ ...restProps }) => (
+    <Toolbar.FlexibleSpace
+      {...restProps}
+      className='flex flex-row items-center justify-center m-auto gap-2'
+    ></Toolbar.FlexibleSpace>
+  )
+
+  const DEPARTMENT = [
+    'Preparador Físico',
+    'Actuación',
+    'Sonido',
+    'Administración de Redes y Telecomunicaciones',
+    'Audiovisual'
+  ]
+
+  const resources = [
+    {
+      fieldName: 'departament',
+      title: 'Department',
+      instances: [
+        { id: DEPARTMENT[0], text: DEPARTMENT[0], color: '#36A5C4' },
+        { id: DEPARTMENT[1], text: DEPARTMENT[1], color: '#BF0249' },
+        { id: DEPARTMENT[2], text: DEPARTMENT[2], color: '#F78B30' },
+        { id: DEPARTMENT[3], text: DEPARTMENT[3], color: '#939393' },
+        { id: DEPARTMENT[4], text: DEPARTMENT[4], color: '#132CAA' }
+      ]
+    }
+  ]
+
+  //const date = format(new Date(), 'yyyy-MM-dd')
+
   return (
-    <div className='bg-gray-100 lg:rounded-l-lg'>
-      <div className='w-12/12 items-center justify-center text-center bg-white-400 '>
-        <div className=' items-center justify-center flex-row  bg-blue-200 rounded-md mt-5 p-5 '>
-          <div className='items-center justify-center  flex flex-col ml-3'>
-            <h1
-              className=' items-center  justify-center text
-            -primary-darkmd:text-center text-5xl font-bold'
-            >
-              ¡Bienvenido!
-            </h1>
-          </div>
-        </div>
+    <div className='flex flex-col items-center lg:p-4'>
+      <h1 className='text-5xl font-bold'>¡Bienvenido!</h1>
+      <div className='bg-white h-screen rounded-lg'>
+        <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1}>
+          <ViewState
+            currentDate={currentDate}
+            onCurrentDateChange={(currentDate) =>
+              dispatch(setCurrentDate(currentDate))
+            }
+          />
+          <WeekView startDayHour={7} endDayHour={21} excludedDays={[0, 6]} />
+          <Appointments />
+          <CurrentTimeIndicator shadePreviousCells={false} />
+          <Resources data={resources} />
+          <Toolbar flexibleSpaceComponent={FlexibleSpace} />
+          <DateNavigator />
+        </Scheduler>
       </div>
-      <div className='w-1/4 p-2 text-center bg-blue-500'>
-        <div className='flex flex-col items-center justify-center rounded-md gap-3 p-3 shadow-md border border-gray-100 '>
-          <div className='flex items-center justify-end gap-2 w-full text-gray-400'>
-            <button className='flex items-center justify-center rounded-full border border-dashed border-gray-400 bg-transparent w-6 h-6'>
-              <PencilIcon className='h-4 w-4 hover:text-green-600' />
-            </button>
-            <button className='flex items-center justify-center rounded-full border border-dashed border-gray-400 bg-transparent w-6 h-6'>
-              <TrashIcon className='h-4 w-4 hover:text-red-600' />
-            </button>
-          </div>
-          <div className='flex items-center justify-center rounded-full w-20 h-20 bg-primary'>
-            <span className='text-2xl font-bold text-white'></span>
-          </div>
-          <div className='flex flex-col items-center gap-1'>
-            <h1 className='font-semibold'></h1>
-            <p className='text-xs font-light'></p>
-          </div>
-          <Link to=''>
-            <button className='text-xs text-white font-medium border-2 bg-primary-light rounded-2xl p-2'>
-              VER DETALLES
-            </button>
-          </Link>
-        </div>
-      </div>
-      <div className='w-1/4 p-2 text-center bg-blue-600'>.w-1/4</div>
-      <div className='w-1/4 h-full p-2  text-center bg-blue-600'>.w-1/4</div>
     </div>
   )
 }

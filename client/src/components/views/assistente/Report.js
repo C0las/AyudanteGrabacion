@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchSchedulers } from '../../../redux/actions/schedulerActions'
 import { format } from 'date-fns'
-import { es } from 'date-fns/locale'
+import { filterAssistantSchedulerSelector } from '../../../redux/selectors/filter'
 
 export default function Report() {
-  const schedulers = useSelector((state) => state.allScheduler.scheduler)
+  const data = useSelector(filterAssistantSchedulerSelector)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Report() {
             CLASE:
           </label>
           <select className='bg-gray-200 border border-gray-200 text-black text-xs rounded h-10 pl-3 w-full'>
-            {schedulers.map((e) => {
+            {data.map((e) => {
               const startDate = format(new Date(e.startDate), 'HH:mm')
               const endDate = format(new Date(e.endDate), 'HH:mm')
               return (

@@ -11,7 +11,8 @@ const initialState = {
     'Escuela de Salud',
     'Escuela de Comunicación',
     'Escuela de Informática'
-  ]
+  ],
+  currentDate: '2021-06-28'
 }
 
 export const schedulerReducer = (state = initialState, action) => {
@@ -26,6 +27,11 @@ export const schedulerReducer = (state = initialState, action) => {
       return {
         ...state,
         schools: action.payload
+      }
+    case ActionTypes.CURRENT_DATE_SCHEDULER:
+      return {
+        ...state,
+        currentDate: action.payload
       }
     default:
       return state
