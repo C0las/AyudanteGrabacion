@@ -14,7 +14,7 @@ export default function AuthRouter() {
   const location = useLocation()
   return (
     <Suspense fallback={<PageLoader />}>
-      <AnimatePresence exitBeforeEnter initial={false}>
+      <AnimatePresence exitBeforeEnter initial={true}>
         <Switch location={location} key={location.pathname}>
           <PublicRoute
             path='/'

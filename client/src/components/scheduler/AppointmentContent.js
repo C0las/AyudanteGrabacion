@@ -14,7 +14,7 @@ const AppointmentContent = ({ data, formatDate, ...restProps }) => {
           <div className='text-sm text-white font-bold'> {data.school}</div>
           <div className='bg-white w-14 h-2 rounded-lg'></div>
           <div className='text-white text-xs font-semibold mt-3'>
-            {data.department}
+            {data.departament}
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { LockClosedIcon } from '@heroicons/react/solid'
 import { login } from '../../redux/actions/authActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/selectors/auth'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const LoginPage = () => {
   const [datos, setDatos] = useState({
@@ -25,6 +26,26 @@ const LoginPage = () => {
   const onSubmit = (event) => {
     event.preventDefault()
     dispatch(login(datos))
+  }
+
+  const loadingContainer = {
+    start: { transition: { staggerChildren: 0.2 } },
+    end: { transition: { staggerChildren: 0.2 } }
+  }
+
+  const loadingCircle = {
+    start: {
+      y: '0%'
+    },
+    end: {
+      y: '100%'
+    }
+  }
+
+  const loadingCircleTransition = {
+    duration: 0.4,
+    yoyo: Infinity,
+    ease: 'easeInOut'
   }
 
   return (
@@ -99,14 +120,39 @@ const LoginPage = () => {
 
                 <button
                   type='submit'
-                  className='group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                  className='group relative w-full flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
-                    <LockClosedIcon
-                      className='h-5 w-5 text-blue-600 group-hover:text-blue-400'
-                      aria-hidden='true'
-                    />
-                  </span>
+                  {isLoading ? (
+                    <motion.div
+                      className='absolute flex flex-row left-0 pl-5 pb-2 items-center justify-center gap-1'
+                      variants={loadingContainer}
+                      initial='start'
+                      animate='end'
+                    >
+                      <motion.div
+                        className='w-2 h-2 bg-white rounded-full'
+                        variants={loadingCircle}
+                        transition={loadingCircleTransition}
+                      ></motion.div>
+                      <motion.div
+                        className='w-2 h-2 bg-white rounded-full'
+                        variants={loadingCircle}
+                        transition={loadingCircleTransition}
+                      ></motion.div>
+                      <motion.div
+                        className='w-2 h-2 bg-white rounded-full'
+                        variants={loadingCircle}
+                        transition={loadingCircleTransition}
+                      ></motion.div>
+                    </motion.div>
+                  ) : (
+                    <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
+                      <LockClosedIcon
+                        className='h-5 w-5 text-blue-600 group-hover:text-blue-400'
+                        aria-hidden='true'
+                      />
+                    </span>
+                  )}
                   Iniciar Sesión
                 </button>
               </div>

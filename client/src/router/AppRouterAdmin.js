@@ -30,7 +30,7 @@ export default function AppRouterAdmin() {
           <PrivateRoute
             component={AssistantDetail}
             exact
-            path='/assistantDetail/:id'
+            path='/assistant/assistantDetail/:id'
           />
           <PrivateRoute component={Logout} path='/logout' exact />
           <PublicRoute path='/login' render={() => <Redirect to='/' />} />

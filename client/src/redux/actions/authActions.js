@@ -21,7 +21,7 @@ export const login = (loginAdminData) => async (dispatch) => {
       type: ActionTypes.LOGIN_SUCCESS,
       payload: data.result.user
     })
-    history.push('/schedule')
+    history.push('/')
   } else {
     dispatch({
       type: ActionTypes.FAILED_REQUEST,

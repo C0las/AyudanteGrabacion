@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchAssitants } from '../../redux/actions/assistantActions'
+import { fetchAssistants } from '../../redux/actions/assistantActions'
 import { ViewGridIcon, ViewListIcon } from '@heroicons/react/solid'
 
 import AssistantList from '../assistant/AssistantList'
@@ -11,7 +11,7 @@ function Assistant() {
   var n = assistants.length
 
   useEffect(() => {
-    dispatch(fetchAssitants)
+    dispatch(fetchAssistants)
   }, [dispatch])
 
   return (

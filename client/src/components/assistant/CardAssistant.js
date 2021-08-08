@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useRouteMatch } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { TrashIcon, PencilIcon } from '@heroicons/react/solid'
 
@@ -7,12 +7,14 @@ const CardAssistant = (props) => {
   const img = props.img
   const titleName = props.name
 
+  let { url } = useRouteMatch()
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: [0, 1] }}
       transition={{ duration: 0.5, delay: props.index / 5 }}
-      className='flex flex-col items-center justify-center rounded-md gap-3 p-3 shadow-md border border-gray-100 '
+      className='flex flex-col items-center justify-center rounded-md gap-3 p-3 shadow-md border border-gray-100'
     >
       <div className='flex items-center justify-end gap-2 w-full text-gray-400'>
         <button className='flex items-center justify-center rounded-full border border-dashed border-gray-400 bg-transparent w-6 h-6'>
@@ -34,7 +36,7 @@ const CardAssistant = (props) => {
       </div>
       <Link
         to={{
-          pathname: `/assistantDetail/${_id}`,
+          pathname: `${url}/assistantDetail/${_id}`,
           state: { img: img, titleName: titleName }
         }}
       >

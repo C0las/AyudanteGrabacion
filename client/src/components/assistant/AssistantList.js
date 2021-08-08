@@ -1,11 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux'
 import CardAssistant from './CardAssistant'
+import CardAssistantLoading from '../common/CardAssistantLoading'
 import { setAssistants } from '../../redux/actions/assistantActions'
+import { filterAssistantsSelector } from '../../redux/selectors/filter'
 import api from '../../api/assistants'
-import { motion } from 'framer-motion'
+
+import {
+  fetchSelectedAssistant,
+  removeSelectedAssistant
+} from '../../redux/actions/assistantActions'
 
 const AssistantList = () => {
-  const assistants = useSelector((state) => state.allAssistants.assistants)
+  let assistants = useSelector(filterAssistantsSelector)
+  const loading = useSelector((state) => state.allAssistants.loading)
   const dispatch = useDispatch()
 
   const removeAssistantHandler = async (id) => {
@@ -38,16 +45,20 @@ const AssistantList = () => {
       return name + ' ' + lastName
     }
 
-    console.log(img(assistant))
-
     return (
-      <CardAssistant
-        assistant={assistant}
-        name={name(assistant)}
-        img={img(assistant)}
-        clickHandler={removeAssistantHandler}
-        index={index}
-      />
+      <>
+        {loading ? (
+          <CardAssistantLoading />
+        ) : (
+          <CardAssistant
+            assistant={assistant}
+            name={name(assistant)}
+            img={img(assistant)}
+            clickHandler={removeAssistantHandler}
+            index={index}
+          />
+        )}
+      </>
     )
   })
 

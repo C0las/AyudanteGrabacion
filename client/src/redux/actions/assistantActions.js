@@ -2,7 +2,12 @@ import api from '../../api/assistants'
 import { ActionTypes } from '../constants/action-types'
 
 // Devuelve todos los assistentes de la api
-export const fetchAssitants = async (dispatch) => {
+export const fetchAssistants = async (dispatch) => {
+  dispatch({
+    type: ActionTypes.ASSISTANTS_LOADING_REQUEST,
+    payload: { loading: true }
+  })
+
   try {
     let data = await api.get('assistant').then(({ data }) => data)
     dispatch({ type: ActionTypes.FETCH_ASSISTANTS, payload: data })
@@ -13,12 +18,23 @@ export const fetchAssitants = async (dispatch) => {
 
 // Devuelve un assistente seleccionado
 export const fetchSelectedAssistant = (id) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.ASSISTANT_LOADING_REQUEST,
+    payload: { loading: true }
+  })
   try {
-    let data = await api.get(`/${id}`).then(({ data }) => data)
+    let data = await api.get(`assistant/${id}`).then(({ data }) => data)
     dispatch({ type: ActionTypes.SELECTED_ASSISTANT, payload: data })
   } catch (error) {
     console.log(error)
   }
+}
+
+export const filterAssistant = (current) => (dispatch) => {
+  dispatch({
+    type: ActionTypes.FILTER_ASSISTANTS,
+    payload: current
+  })
 }
 
 /*export const deleteAssistant = (id) => async (dispatch) => {
