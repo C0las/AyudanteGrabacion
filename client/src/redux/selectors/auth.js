@@ -1,13 +1,18 @@
-import { createSelector } from 'reselect'
-const authSelect = (state) => state.auth
+import { createSelector } from "reselect";
+const authSelect = (state) => state.auth;
 
-export const selectAuth = createSelector([authSelect], (auth) => auth)
+export const selectAuth = createSelector([authSelect], (auth) => auth);
 export const selectCurrentAdmin = createSelector(
   [authSelect],
   (auth) => auth.current
-)
+);
 
 export const isLoggedIn = createSelector(
   [authSelect],
   (auth) => auth.isLoggedIn
-)
+);
+
+export const idAssistant = createSelector(
+  [authSelect],
+  (auth) => auth.current.assistant
+);
