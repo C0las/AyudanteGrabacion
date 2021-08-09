@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchSchedulers } from '../../../redux/actions/schedulerActions'
 import { format } from 'date-fns'
 import { filterAssistantSchedulerSelector } from '../../../redux/selectors/filter'
+import api from '../../../api/assistants'
 
 export default function Report() {
   const data = useSelector(filterAssistantSchedulerSelector)

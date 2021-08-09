@@ -1,27 +1,23 @@
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import CardAssistant from './CardAssistant'
 import CardAssistantLoading from '../common/CardAssistantLoading'
-import { setAssistants } from '../../redux/actions/assistantActions'
+import {
+  setAssistants,
+  fetchAssistants
+} from '../../redux/actions/assistantActions'
 import { filterAssistantsSelector } from '../../redux/selectors/filter'
 import api from '../../api/assistants'
 
-import {
-  fetchSelectedAssistant,
-  removeSelectedAssistant
-} from '../../redux/actions/assistantActions'
+import { assistantDeleteRequest } from '../../redux/actions/assistantActions'
 
 const AssistantList = () => {
   let assistants = useSelector(filterAssistantsSelector)
   const loading = useSelector((state) => state.allAssistants.loading)
   const dispatch = useDispatch()
 
-  const removeAssistantHandler = async (id) => {
-    let data = await api.delete(`/${id}`)
-    const newAssistantList = assistants.filter((assistant) => {
-      return assistant.id !== id
-    })
-    console.log(newAssistantList)
-    dispatch(setAssistants(newAssistantList))
+  const removeAssistantHandler = (id) => {
+    dispatch(assistantDeleteRequest(id))
   }
 
   const renderAssistant = assistants.map((assistant, index) => {

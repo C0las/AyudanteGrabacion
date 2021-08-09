@@ -21,7 +21,7 @@ const CardAssistant = (props) => {
           <PencilIcon className='h-4 w-4 hover:text-green-600' />
         </button>
         <button
-          onClick={() => props.clickHanlder(_id)}
+          onClick={() => props.clickHandler(_id)}
           className='flex items-center justify-center rounded-full border border-dashed border-gray-400 bg-transparent w-6 h-6'
         >
           <TrashIcon className='h-4 w-4 hover:text-red-600' />
