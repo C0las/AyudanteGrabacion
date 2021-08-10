@@ -49,117 +49,111 @@ const LoginPage = () => {
   }
 
   return (
-    <div className='flex flex-row w-screen h-screen p-10 bg-gradient-to-r from-green-400 to-blue-500'>
-      <div className='flex rounded-xl w-full  shadow-md'>
-        <div className='bg-gradient-to-r from-blue-500 to-blue-800 w-2/5 rounded-l-lg'></div>
-
-        <div className='flex flex-col justify-between w-3/5 rounded-r-lg p-20 bg-white '>
-          <div className='text-left'>Logo</div>
-
-          <div className='flex flex-col w-full gap-5'>
-            <h1 className='text-xl font-bold text-center text-gray-700'>
-              ¡Bienvenido de nuevo!
-            </h1>
-
-            <form onSubmit={onSubmit} className='flex flex-col  w-full gap-5'>
-              <div className='flex flex-col'>
-                <label className='text-xs font-medium text-gray-600'>
-                  Nombre de Usuario
-                </label>
+    <div className='lg:flex flex-row h-screen bg-gradient-to-r from-green-400 to-blue-500 p-10'>
+      <div className='lg:flex bg-gradient-to-r from-blue-500 to-blue-800 lg:w-3/5 rounded-l-lg hidden z-0'></div>
+      <div className='flex flex-col justify-between bg-white w-full lg:w-3/5 h-full rounded-lg xl:rounded-r-lg p-10 lg:p-20 z-10'>
+        <div className='text-left'>Logo</div>
+        <h1 className='text-xl font-bold text-center text-gray-700'>
+          ¡Bienvenido de nuevo!
+        </h1>
+        <div className='flex flex-col gap-5'>
+          <form onSubmit={onSubmit} className='flex flex-col  w-full gap-5'>
+            <div className='flex flex-col'>
+              <label className='text-xs font-medium text-gray-600'>
+                Nombre de Usuario
+              </label>
+              <input
+                name='username'
+                type='text'
+                required
+                className='appearance-none rounded-none relative block w-full py-2 pl-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                placeholder='Nombre de Usuario'
+                onChange={handleInput}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <label className='text-xs font-medium text-gray-600'>
+                Correo Electrónico
+              </label>
+              <input
+                name='email'
+                type='email'
+                required
+                className='appearance-none rounded-none relative block w-full py-2 pl-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                placeholder='example@gmail.com'
+                onChange={handleInput}
+              />
+            </div>
+            <div className='flex flex-col'>
+              <label className='text-xs font-medium text-gray-600'>
+                Contraseña
+              </label>
+              <input
+                name='password'
+                type='password'
+                required
+                className='appearance-none rounded-none relative block w-full py-2 pl-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                placeholder='*****'
+                onChange={handleInput}
+              />
+            </div>
+            <div className='flex flex-row justify-between items-center gap-10 lg:gap-28'>
+              <div className='flex items-center'>
                 <input
-                  name='username'
-                  type='text'
-                  required
-                  className='appearance-none rounded-none relative block w-full py-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='Nombre de Usuario'
-                  onChange={handleInput}
+                  id='remember-me'
+                  name='remember-me'
+                  type='checkbox'
+                  className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
                 />
-              </div>
-              <div className='flex flex-col'>
-                <label className='text-xs font-medium text-gray-600'>
-                  Correo Electrónico
-                </label>
-                <input
-                  name='email'
-                  type='email'
-                  required
-                  className='appearance-none rounded-none relative block w-full py-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='example@gmail.com'
-                  onChange={handleInput}
-                />
-              </div>
-              <div className='flex flex-col'>
-                <label className='text-xs font-medium text-gray-600'>
-                  Contraseña
-                </label>
-                <input
-                  name='password'
-                  type='password'
-                  required
-                  className='appearance-none rounded-none relative block w-full py-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                  placeholder='*****'
-                  onChange={handleInput}
-                />
-              </div>
-
-              <div className='flex flex-row gap-28'>
-                <div className='flex items-center'>
-                  <input
-                    id='remember-me'
-                    name='remember-me'
-                    type='checkbox'
-                    className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
-                  />
-                  <label
-                    htmlFor='remember-me'
-                    className='ml-2 block text-sm text-gray-900'
-                  >
-                    Recuerdame
-                  </label>
-                </div>
-
-                <button
-                  type='submit'
-                  className='group relative w-full flex items-center justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                <label
+                  htmlFor='remember-me'
+                  className='ml-2 block text-sm text-gray-900'
                 >
-                  {isLoading ? (
-                    <motion.div
-                      className='absolute flex flex-row left-0 pl-5 pb-2 items-center justify-center gap-1'
-                      variants={loadingContainer}
-                      initial='start'
-                      animate='end'
-                    >
-                      <motion.div
-                        className='w-2 h-2 bg-white rounded-full'
-                        variants={loadingCircle}
-                        transition={loadingCircleTransition}
-                      ></motion.div>
-                      <motion.div
-                        className='w-2 h-2 bg-white rounded-full'
-                        variants={loadingCircle}
-                        transition={loadingCircleTransition}
-                      ></motion.div>
-                      <motion.div
-                        className='w-2 h-2 bg-white rounded-full'
-                        variants={loadingCircle}
-                        transition={loadingCircleTransition}
-                      ></motion.div>
-                    </motion.div>
-                  ) : (
-                    <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
-                      <LockClosedIcon
-                        className='h-5 w-5 text-blue-600 group-hover:text-blue-400'
-                        aria-hidden='true'
-                      />
-                    </span>
-                  )}
-                  Iniciar Sesión
-                </button>
+                  Recuerdame
+                </label>
               </div>
-            </form>
-          </div>
-          <div></div>
+
+              <button
+                type='submit'
+                className='group relative w-full h-10 flex flex-row items-center justify-center border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+              >
+                {isLoading ? (
+                  <motion.div
+                    className='absolute flex flex-row left-0 pl-5 pb-2 items-center justify-center gap-1'
+                    variants={loadingContainer}
+                    initial='start'
+                    animate='end'
+                  >
+                    <motion.div
+                      className='w-2 h-2 bg-white rounded-full'
+                      variants={loadingCircle}
+                      transition={loadingCircleTransition}
+                    ></motion.div>
+                    <motion.div
+                      className='w-2 h-2 bg-white rounded-full'
+                      variants={loadingCircle}
+                      transition={loadingCircleTransition}
+                    ></motion.div>
+                    <motion.div
+                      className='w-2 h-2 bg-white rounded-full'
+                      variants={loadingCircle}
+                      transition={loadingCircleTransition}
+                    ></motion.div>
+                  </motion.div>
+                ) : (
+                  <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
+                    <LockClosedIcon
+                      className='h-5 w-5 text-blue-600 group-hover:text-blue-400'
+                      aria-hidden='true'
+                    />
+                  </span>
+                )}
+                Iniciar Sesión
+              </button>
+            </div>
+          </form>
         </div>
+        <h1 className='font-light text-xs text-gray-400'>version 1.0982021</h1>
       </div>
     </div>
   )

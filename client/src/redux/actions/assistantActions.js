@@ -1,6 +1,5 @@
 import api from '../../api/assistants'
 import { ActionTypes } from '../constants/action-types'
-import history from '../../utils/history'
 
 // Devuelve todos los assistentes de la api
 export const fetchAssistants = async (dispatch) => {
@@ -34,6 +33,13 @@ export const fetchSelectedAssistant = (id) => async (dispatch) => {
 export const filterAssistant = (current) => (dispatch) => {
   dispatch({
     type: ActionTypes.FILTER_ASSISTANTS,
+    payload: current
+  })
+}
+
+export const setCurrentDay = (current) => (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_CURRENT_DAY,
     payload: current
   })
 }
