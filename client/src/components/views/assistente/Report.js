@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSchedulers } from "../../../redux/actions/schedulerActions";
 import { format } from "date-fns";
 import { filterAssistantSchedulerSelector } from "../../../redux/selectors/filter";
 import api from "../../../api/assistants";
+import axios from "axios";
+import Selector from "./Select";
+import swal from "sweetalert";
 
 export default class Report extends React.Component {
   state = {
@@ -22,9 +25,19 @@ export default class Report extends React.Component {
     console.log(res.data);
     this.setState({
       lastName: res.data.lastName,
+      name: res.data.name,
     });
   }
 
+  mostrar = () => {
+    swal({
+      title: "titulo",
+      text: "texto de pana",
+      icon: "success",
+      button: "Aceptar",
+      timer: "60000",
+    });
+  };
   onSubmit = async (e) => {
     e.preventDefault();
     await axios.post("https://api-ayudantes.herokuapp.com/api/report", {
@@ -33,6 +46,8 @@ export default class Report extends React.Component {
       observacion: this.state.observacion,
       clase: this.state.clase,
     });
+    this.mostrar();
+
     window.location.href = "/";
   };
 
@@ -57,7 +72,7 @@ export default class Report extends React.Component {
               Nombre:
             </label>
             <input
-              value={this.state.lastName}
+              value={this.state.name}
               name="name"
               className=" bg-gray-200 text-black border border-gray-200 rounded h-10  max-w-min pl-3"
               onChange={this.onChange}
