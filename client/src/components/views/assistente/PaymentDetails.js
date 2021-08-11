@@ -28,8 +28,8 @@ const PaymentDetails = (props) => {
   const updatePayment = async () => {
     let updateNew = { ...payment.paymentDetails };
     let list = payment.data;
-   
-    /*list.push(updateNew);
+  };
+  /*list.push(updateNew);
     await axios
       .put(`https://api-ayudantes.herokuapp.com/api/assistant/${id}`, list)
       .then((res) => {

@@ -31,7 +31,7 @@ export default function AppRouterAssistant() {
             exact
           />
           <PrivateRoute
-            path="/PaymentDetails"
+            path="/PaymentDetails/:id"
             component={PaymentDetails}
             exact
           />
