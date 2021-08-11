@@ -1,3 +1,6 @@
+import { format } from 'date-fns'
+import { es } from 'date-fns/locale'
+import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 export const filterAssistantsSelector = createSelector(
@@ -26,3 +29,21 @@ export const filterAssistantSchedulerSelector = createSelector(
     return data
   }
 )
+
+export const filterAssistantsDaySelector = (scheduler) =>
+  createSelector(
+    (state) => state.allAssistants.currentDay,
+    (currentDay) => {
+      let data = scheduler.filter((scheduler) => {
+        let startDate = format(new Date(scheduler.startDate), 'EEEE', {
+          locale: es
+        })
+
+        return startDate
+          .replace(/^\w/, (c) => c.toUpperCase())
+          .includes(currentDay)
+      })
+
+      return data
+    }
+  )

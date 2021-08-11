@@ -37,17 +37,25 @@ export const filterAssistant = (current) => (dispatch) => {
   })
 }
 
-/*export const deleteAssistant = (id) => async (dispatch) => {
-  try {
-    await api.delete(`/${id}`)
-    const newAssistantList = assistants.filter((assistant) => {
-      return assistant.id !== id
+export const setCurrentDay = (current) => (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_CURRENT_DAY,
+    payload: current
+  })
+}
+
+const assistantDelete = () => ({ type: ActionTypes.DELETE_ASSISTANT })
+
+export const assistantDeleteRequest = (id) => async (dispatch) => {
+  await api
+    .delete(`assistant/${id}`)
+    .then((resp) => {
+      console.log('resp', resp)
+      dispatch(assistantDelete())
+      dispatch(fetchAssistants)
     })
-    dispatch(setAssistants(newAssistantList))
-  } catch (error) {
-    console.log(error)
-  }
-}*/
+    .catch((error) => console.log(error))
+}
 
 // Modifica o Actualiza el 'state' del assistente
 export const setAssistants = (assistants) => {

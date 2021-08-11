@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchSchedulers } from "../../../redux/actions/schedulerActions";
 import { format } from "date-fns";
 import { filterAssistantSchedulerSelector } from "../../../redux/selectors/filter";
-import axios from "axios";
-import Selector from "./Select";
+import api from "../../../api/assistants";
 
 export default class Report extends React.Component {
   state = {

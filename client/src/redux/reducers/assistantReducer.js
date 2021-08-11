@@ -1,9 +1,15 @@
 import { ActionTypes } from '../constants/action-types'
+import { format } from 'date-fns'
+import { es } from 'date-fns/locale'
+
+const today = format(new Date(), 'EEEE', { locale: es })
 
 // Se define el valor por defecto del 'state'
 const initialState = {
   assistants: [],
+  report: [],
   currentFilter: '',
+  currentDay: today.replace(/^\w/, (c) => c.toUpperCase()),
   loading: false
 }
 
@@ -24,12 +30,21 @@ export const assistantReducer = (state = initialState, action) => {
     case ActionTypes.FETCH_ASSISTANTS:
       // Devuelve todo el 'state' actual, modificando 'assistants', añadiendo un nuevo objeto(s)
       return { ...state, assistants: action.payload, loading: false }
+    case ActionTypes.DELETE_ASSISTANT:
+      // Devuelve todo el 'state' actual, modificando 'assistants', añadiendo un nuevo objeto(s)
+      return { ...state, loading: false }
     case ActionTypes.SET_ASSISTANTS:
       // Devuelve todo el 'state' actual, modificando 'assistants', añadiendo un nuevo objeto(s)
       return { ...state, assistants: action.payload }
 
     case ActionTypes.FILTER_ASSISTANTS:
       return { ...state, currentFilter: action.payload }
+
+    case ActionTypes.SET_CURRENT_DAY:
+      return { ...state, currentDay: action.payload }
+
+    case ActionTypes.FETCH_REPORT:
+      return { ...state, report: action.payload, loading: false }
 
     // Si el 'reducer' no se preocupa por este 'action.type', devuelve el estado existente sin cambios
     default:
