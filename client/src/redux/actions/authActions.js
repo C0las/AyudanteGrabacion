@@ -1,9 +1,9 @@
 import { ActionTypes } from '../constants/action-types'
 import * as authService from '../../services/auth'
 import storePersist from '../storePersist'
-import history from '../../utils/history'
+import { useHistory } from 'react-router-dom'
 
-export const login = (loginAdminData) => async (dispatch) => {
+export const login = (loginAdminData, history) => async (dispatch) => {
   dispatch({
     type: ActionTypes.LOADING_REQUEST,
     payload: { loading: true }
@@ -30,7 +30,7 @@ export const login = (loginAdminData) => async (dispatch) => {
   }
 }
 
-export const logout = () => async (dispatch) => {
+export const logout = (history) => async (dispatch) => {
   authService.logout()
   dispatch({
     type: ActionTypes.LOGOUT_SUCCESS

@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/selectors/auth'
 import logo from '../../assets/6.png'
 import Loading from '../common/Loading'
+import { useHistory } from 'react-router-dom'
 
 const LoginPage = () => {
+  let history = useHistory()
+
   const [datos, setDatos] = useState({
     username: '',
     email: '',
@@ -26,7 +29,7 @@ const LoginPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault()
-    dispatch(login(datos))
+    dispatch(login(datos, history))
   }
 
   return (

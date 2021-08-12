@@ -29,13 +29,11 @@ function App() {
     )
   else {
     return (
-      <RouterHistory history={history}>
-        <BrowserRouter basename='/AyudanteGrabacion'>
-          <Provider store={store}>
-            <Router />
-          </Provider>
-        </BrowserRouter>
-      </RouterHistory>
+      <BrowserRouter basename='/AyudanteGrabacion'>
+        <Provider store={store}>
+          <Router />
+        </Provider>
+      </BrowserRouter>
     )
   }
 }
