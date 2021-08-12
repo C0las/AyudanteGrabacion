@@ -20,7 +20,7 @@ export default function MainNav() {
       <div className=' lg:w-24 bg-primary rounded-lg relative'>
         <div className='flex lg:flex-col items-center justify-center lg:h-screen space-x-4 lg:space-y-4 lg:space-x-0 py-2 lg:py-4'>
           <NavLink
-            to='/'
+            to='/AyudanteGrabacion'
             className='group'
             activeClassName='bg-gray-600 rounded-xl text-white opacity-100'
           >
@@ -29,7 +29,7 @@ export default function MainNav() {
             </div>
           </NavLink>
           <NavLink
-            to={`/report/${assistant_id}`}
+            to={`/AyudanteGrabacion/report/${assistant_id}`}
             className='group'
             activeClassName='bg-gray-600 rounded-xl text-white opacity-100'
           >
@@ -38,7 +38,7 @@ export default function MainNav() {
             </div>
           </NavLink>
           <NavLink
-            to='/assistantDetail/'
+            to='/AyudanteGrabacion/assistantDetail/'
             className='group'
             activeClassName='bg-gray-600 rounded-xl text-white opacity-100'
           >
@@ -46,12 +46,15 @@ export default function MainNav() {
               <UsersIcon className='w-6 h-6' />
             </div>
           </NavLink>
-          <NavLink to={`/PaymentDetails/${assistant_id}`} className='group'>
+          <NavLink
+            to={`/AyudanteGrabacion/PaymentDetails/${assistant_id}`}
+            className='group'
+          >
             <div className='flex justify-center items-center w-10 h-10 lg:w-14 lg:h-14 text-white opacity-50 rounded-xl group-hover:bg-gray-600 group-hover:opacity-50 group-hover:text-primary transform group-hover:-translate-y-8 lg:group-hover:-translate-y-0 lg:group-hover:translate-x-8 duration-300 group-hover:shadow-xl'>
               <CreditCardIcon className='w-6 h-6' />
             </div>
           </NavLink>
-          <a href='/logout' className='group'>
+          <a href='/AyudanteGrabacion/logout' className='group'>
             <div className='flex justify-center items-center w-10 h-10 lg:w-14 lg:h-14 text-white  opacity-50 rounded-xl group-hover:bg-gray-600 group-hover:opacity-100 group-hover:text-primary transform group-hover:-translate-y-8 lg:group-hover:-translate-y-0 lg:group-hover:translate-x-8 duration-300 group-hover:shadow-xl'>
               <LogoutIcon className='w-6 h-6' />
             </div>

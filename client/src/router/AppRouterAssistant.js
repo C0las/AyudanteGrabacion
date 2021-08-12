@@ -39,20 +39,23 @@ export default function AppRouterAssistant() {
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={true}>
         <Switch location={location} key={location.pathname}>
-          <PrivateRoute path='/' component={Home} exact />
+          <PrivateRoute path='/AyudanteGrabacion' component={Home} exact />
           <PrivateRoute
             component={AssistantPerfil}
-            path='/assistantDetail'
+            path='/AyudanteGrabacion/assistantDetail'
             exact
           />
           <PrivateRoute
-            path='/PaymentDetails/:id'
+            path='/AyudanteGrabacion/PaymentDetails/:id'
             component={PaymentDetails}
             exact
           />
           <PrivateRoute component={Report} path='/report/:id' exact />
           <PrivateRoute component={Logout} path='/logout' exact />
-          <PublicRoute path='/login' render={() => <Redirect to='/' />} />
+          <PublicRoute
+            path='/AyudanteGrabacion/login'
+            render={() => <Redirect to='/' />}
+          />
           <Route
             path='*'
             component={NotFound}

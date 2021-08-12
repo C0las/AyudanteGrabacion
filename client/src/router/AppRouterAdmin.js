@@ -21,19 +21,30 @@ export default function AppRouterAdmin() {
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={false}>
         <Switch location={location} key={location.pathname}>
-          <PrivateRoute exact path='/'>
-            <Redirect to='/schedule' />
+          <PrivateRoute exact path='/AyudanteGrabacion'>
+            <Redirect to='/AyudanteGrabacion/schedule' />
           </PrivateRoute>
 
-          <PrivateRoute path='/schedule' component={Schedule} exact />
+          <PrivateRoute
+            path='/AyudanteGrabacion/schedule'
+            component={Schedule}
+            exact
+          />
           <PrivateRoute component={Assistant} path='/assistant' exact />
           <PrivateRoute
             component={AssistantDetail}
             exact
-            path='/assistant/assistantDetail/:id'
+            path='/AyudanteGrabacion/assistant/assistantDetail/:id'
           />
-          <PrivateRoute component={Logout} path='/logout' exact />
-          <PublicRoute path='/login' render={() => <Redirect to='/' />} />
+          <PrivateRoute
+            component={Logout}
+            path='/AyudanteGrabacion/logout'
+            exact
+          />
+          <PublicRoute
+            path='/AyudanteGrabacion/login'
+            render={() => <Redirect to='/' />}
+          />
           <Route
             path='*'
             component={NotFound}

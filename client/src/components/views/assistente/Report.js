@@ -48,7 +48,7 @@ export default class Report extends React.Component {
     })
     this.mostrar()
 
-    window.location.href = '/'
+    window.location.href = '/AyudanteGrabacion'
   }
 
   onChange = (e) => {
