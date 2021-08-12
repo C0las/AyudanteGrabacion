@@ -21,7 +21,7 @@ export const login = (loginAdminData) => async (dispatch) => {
       type: ActionTypes.LOGIN_SUCCESS,
       payload: data.result.user
     })
-    history.push('/AyudanteGrabacion')
+    history.push('/')
   } else {
     dispatch({
       type: ActionTypes.FAILED_REQUEST,
@@ -35,5 +35,5 @@ export const logout = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.LOGOUT_SUCCESS
   })
-  history.push('/assistantDetail/login')
+  history.push('/login')
 }

@@ -54,3 +54,8 @@ export const filterAssistantSelector = createSelector(
   [assistantSelect],
   (assistant) => assistant.assistant
 )
+
+export const filterAssistantDaysLengthSelector = createSelector(
+  [assistantSelect],
+  (assistant) => assistant.assistant.daysAvailable.length
+)

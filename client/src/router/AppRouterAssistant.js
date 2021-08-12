@@ -13,6 +13,8 @@ import {
   assistantUpdateRequest
 } from '../redux/actions/assistantActions'
 
+import { idAssistant } from '../redux/selectors/auth'
+
 // Ayudante
 const Home = lazy(() => import('../components/views/assistente/Home'))
 const AssistantPerfil = lazy(() =>
@@ -26,36 +28,32 @@ const Logout = lazy(() => import('../components/views/Logout'))
 const NotFound = lazy(() => import('../components/views/NotFound'))
 
 export default function AppRouterAssistant() {
-  const location = useLocation()
   const dispatch = useDispatch()
-  const assistantId = useSelector((state) => state.auth)
-
+  const id = useSelector(idAssistant)
+  const location = useLocation()
+  dispatch(fetchSelectedAssistant(id))
   useEffect(() => {
     dispatch(fetchSchedulers)
-    dispatch(fetchSelectedAssistant(assistantId.current.assistant))
-  }, [assistantId, dispatch])
+  }, [])
 
   return (
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={true}>
         <Switch location={location} key={location.pathname}>
-          <PrivateRoute path='/AyudanteGrabacion' component={Home} exact />
+          <PrivateRoute path='/' component={Home} exact />
           <PrivateRoute
             component={AssistantPerfil}
-            path='/AyudanteGrabacion/assistantDetail'
+            path='/assistantDetail'
             exact
           />
           <PrivateRoute
-            path='/AyudanteGrabacion/PaymentDetails/:id'
+            path='/PaymentDetails/:id'
             component={PaymentDetails}
             exact
           />
           <PrivateRoute component={Report} path='/report/:id' exact />
           <PrivateRoute component={Logout} path='/logout' exact />
-          <PublicRoute
-            path='/AyudanteGrabacion/login'
-            render={() => <Redirect to='/' />}
-          />
+          <PublicRoute path='/login' render={() => <Redirect to='/' />} />
           <Route
             path='*'
             component={NotFound}

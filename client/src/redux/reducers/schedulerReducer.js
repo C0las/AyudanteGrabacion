@@ -1,8 +1,3 @@
-import {
-  schedulerInitialState,
-  SCHEDULER_STATE_CHANGE_ACTION
-} from '../constants/index'
-
 import { ActionTypes } from '../constants/action-types'
 
 const initialState = {

@@ -27,7 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <Component {...props} />
           </motion.div>
         ) : (
-          <Redirect to='/AyudanteGrabacion/login' />
+          <Redirect to='/login' />
         )
       }
     />

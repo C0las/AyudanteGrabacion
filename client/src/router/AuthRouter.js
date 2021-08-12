@@ -17,15 +17,11 @@ export default function AuthRouter() {
       <AnimatePresence exitBeforeEnter initial={true}>
         <Switch location={location} key={location.pathname}>
           <PublicRoute
-            path='/AyudanteGrabacion'
+            path='/'
             component={Login}
-            render={() => <Redirect to='/AyudanteGrabacion/login' />}
+            render={() => <Redirect to='/login' />}
           />
-          <PublicRoute
-            component={Login}
-            path='/AyudanteGrabacion/login'
-            exact
-          />
+          <PublicRoute component={Login} path='/login' exact />
           {/*<Route
             path="*"
             component={NotFound}

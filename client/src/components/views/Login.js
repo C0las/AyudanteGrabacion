@@ -3,7 +3,6 @@ import { LockClosedIcon } from '@heroicons/react/solid'
 import { login } from '../../redux/actions/authActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/selectors/auth'
-import { motion, AnimatePresence } from 'framer-motion'
 import logo from '../../assets/6.png'
 import Loading from '../common/Loading'
 

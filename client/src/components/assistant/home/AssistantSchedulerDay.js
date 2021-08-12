@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { format } from 'date-fns'
 import { LocationMarkerIcon, UserIcon } from '@heroicons/react/outline'
-import { setCurrentDay } from '../../../redux/actions/assistantActions'
+import {
+  fetchSelectedAssistant,
+  setCurrentDay
+} from '../../../redux/actions/assistantActions'
 import {
   filterAssistantSchedulerSelector,
   filterAssistantsDaySelector
 } from '../../../redux/selectors/filter'
 
 import { ReactComponent as Calendario } from '../../../assets/calendario.svg'
+import { fetchSchedulers } from '../../../redux/actions/schedulerActions'
 
 function AssistantSchedulerDay() {
   const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']

@@ -10,7 +10,10 @@ import {
   fetchSelectedAssistant,
   assistantUpdateRequest
 } from '../../../redux/actions/assistantActions'
-import { filterAssistantSelector } from '../../../redux/selectors/filter'
+import {
+  filterAssistantDaysLengthSelector,
+  filterAssistantSelector
+} from '../../../redux/selectors/filter'
 
 import Modal from '../../common/Modal'
 import SchedulerByWeek from '../../assistant/home/AssistantSchedulerWeek'
@@ -25,15 +28,12 @@ export default function Home() {
 
   const assistant = useSelector(filterAssistantSelector)
   const loading = useSelector((state) => state.assistant.loading)
+  const isDaysEmpty = useSelector(filterAssistantDaysLengthSelector)
 
   const { name, lastName, rut, email, fono } = assistant
   const daysAvailable = assistant.daysAvailable
   const address = assistant.address
   const paymentDetails = assistant.paymentDetails || {}
-
-  useEffect(() => {
-    dispatch(fetchSelectedAssistant(assistantId.current.assistant))
-  }, [assistantId, dispatch])
 
   const assistantRequest = {
     name: name,
@@ -58,11 +58,7 @@ export default function Home() {
 
   return (
     <>
-      {assistant.daysAvailable.length === 0 ? (
-        <Modal update={update} loading={loading} />
-      ) : (
-        ''
-      )}
+      {isDaysEmpty === 0 && <Modal update={update} loading={loading} />}
 
       <div className='flex flex-col items-center'>
         <div className='flex flex-row items-center justify-between w-full pl-10 pr-10 mt-5'>
