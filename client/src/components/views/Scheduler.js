@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchAssistants } from '../../redux/actions/assistantActions'
 import { fetchSchedulers } from '../../redux/actions/schedulerActions'
 
-const Sheduler = lazy(() => import('../scheduler/Index'))
-const Sidebar = lazy(() => import('../scheduler/Sidebar'))
+const Sheduler = lazy(() => import('../admin/scheduler/Index'))
+const Sidebar = lazy(() => import('../admin/scheduler/Sidebar'))
 
 function Scheduler() {
   const dispatch = useDispatch()

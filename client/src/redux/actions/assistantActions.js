@@ -57,6 +57,20 @@ export const assistantDeleteRequest = (id) => async (dispatch) => {
     .catch((error) => console.log(error))
 }
 
+export const assistantUpdateRequest = (id, data) => async (dispatch) => {
+  dispatch({
+    type: ActionTypes.ASSISTANT_LOADING_REQUEST,
+    payload: { loading: true }
+  })
+
+  try {
+    await api
+      .put(`assistant/${id}`, data)
+      .then((resp) => console.log('resp', resp))
+    dispatch({ type: ActionTypes.UPDATE_ASSISTANT, payload: data })
+  } catch (error) {}
+}
+
 // Modifica o Actualiza el 'state' del assistente
 export const setAssistants = (assistants) => {
   return {

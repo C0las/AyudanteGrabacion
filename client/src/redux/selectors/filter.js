@@ -3,6 +3,8 @@ import { es } from 'date-fns/locale'
 import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
+const assistantSelect = (state) => state.assistant
+
 export const filterAssistantsSelector = createSelector(
   (state) => state.allAssistants.assistants,
   (state) => state.allAssistants.currentFilter,
@@ -47,3 +49,8 @@ export const filterAssistantsDaySelector = (scheduler) =>
       return data
     }
   )
+
+export const filterAssistantSelector = createSelector(
+  [assistantSelect],
+  (assistant) => assistant.assistant
+)

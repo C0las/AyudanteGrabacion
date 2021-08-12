@@ -17,8 +17,8 @@ import {
   AppointmentForm
 } from '@devexpress/dx-react-scheduler-material-ui'
 import { format } from 'date-fns'
-import AppointmentContent from '../common/AppointmentContent'
-import { setSchedulers } from '../../redux/actions/schedulerActions'
+import AppointmentContent from '../../common/AppointmentContent'
+import { setSchedulers } from '../../../redux/actions/schedulerActions'
 
 function SchedulerContainer() {
   const dispatch = useDispatch()

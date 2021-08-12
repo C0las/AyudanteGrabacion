@@ -59,7 +59,7 @@ export const selectedAssistantReducer = (
 ) => {
   // Se recorren los 'action' dependiento del 'type' capturado
   switch (action.type) {
-    case ActionTypes.ASSISTANTS_LOADING_REQUEST:
+    case ActionTypes.ASSISTANT_LOADING_REQUEST:
       return {
         ...state,
         loading: true
@@ -70,7 +70,9 @@ export const selectedAssistantReducer = (
     case ActionTypes.REMOVE_SELECTED_ASSISTANT:
       // Limpia el 'state'
       return { assistant: {}, loading: false }
-
+    case ActionTypes.UPDATE_ASSISTANT:
+      // Devuelve todo el 'state' actual, modificando 'assistants', añadiendo un nuevo objeto(s)
+      return { ...state, assistant: action.payload, loading: false }
     // Si el 'reducer' no se preocupa por este 'action.type', devuelve el estado existente sin cambios
     default:
       return state

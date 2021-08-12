@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchAssistants } from '../../redux/actions/assistantActions'
 import { ViewGridIcon, ViewListIcon } from '@heroicons/react/solid'
 
-import AssistantList from '../assistant/AssistantList'
+import AssistantList from '../admin/assistant/AssistantList'
 
 function Assistant() {
   const assistants = useSelector((state) => state.allAssistants.assistants)

@@ -4,6 +4,8 @@ import { login } from '../../redux/actions/authActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAuth } from '../../redux/selectors/auth'
 import { motion, AnimatePresence } from 'framer-motion'
+import logo from '../../assets/6.png'
+import Loading from '../common/Loading'
 
 const LoginPage = () => {
   const [datos, setDatos] = useState({
@@ -28,31 +30,11 @@ const LoginPage = () => {
     dispatch(login(datos))
   }
 
-  const loadingContainer = {
-    start: { transition: { staggerChildren: 0.2 } },
-    end: { transition: { staggerChildren: 0.2 } }
-  }
-
-  const loadingCircle = {
-    start: {
-      y: '0%'
-    },
-    end: {
-      y: '100%'
-    }
-  }
-
-  const loadingCircleTransition = {
-    duration: 0.4,
-    yoyo: Infinity,
-    ease: 'easeInOut'
-  }
-
   return (
     <div className='lg:flex flex-row h-screen bg-gradient-to-r from-green-400 to-blue-500 p-10'>
       <div className='lg:flex bg-gradient-to-r from-blue-500 to-blue-800 lg:w-3/5 rounded-l-lg hidden z-0'></div>
       <div className='flex flex-col justify-between bg-white w-full lg:w-3/5 h-full rounded-lg xl:rounded-r-lg p-10 lg:p-20 z-10'>
-        <div className='text-left'>Logo</div>
+        <img src={logo} alt='' className='h-20 w-20' />
         <h1 className='text-xl font-bold text-center text-gray-700'>
           ¡Bienvenido de nuevo!
         </h1>
@@ -118,28 +100,7 @@ const LoginPage = () => {
                 className='group relative w-full h-10 flex flex-row items-center justify-center border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
               >
                 {isLoading ? (
-                  <motion.div
-                    className='absolute flex flex-row left-0 pl-5 pb-2 items-center justify-center gap-1'
-                    variants={loadingContainer}
-                    initial='start'
-                    animate='end'
-                  >
-                    <motion.div
-                      className='w-2 h-2 bg-white rounded-full'
-                      variants={loadingCircle}
-                      transition={loadingCircleTransition}
-                    ></motion.div>
-                    <motion.div
-                      className='w-2 h-2 bg-white rounded-full'
-                      variants={loadingCircle}
-                      transition={loadingCircleTransition}
-                    ></motion.div>
-                    <motion.div
-                      className='w-2 h-2 bg-white rounded-full'
-                      variants={loadingCircle}
-                      transition={loadingCircleTransition}
-                    ></motion.div>
-                  </motion.div>
+                  <Loading />
                 ) : (
                   <span className='absolute left-0 inset-y-0 flex items-center pl-3'>
                     <LockClosedIcon

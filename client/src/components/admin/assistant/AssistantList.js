@@ -1,15 +1,10 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import CardAssistant from './CardAssistant'
-import CardAssistantLoading from '../common/CardAssistantLoading'
-import {
-  setAssistants,
-  fetchAssistants
-} from '../../redux/actions/assistantActions'
-import { filterAssistantsSelector } from '../../redux/selectors/filter'
-import api from '../../api/assistants'
+import CardAssistantLoading from '../../common/CardAssistantLoading'
+import { filterAssistantsSelector } from '../../../redux/selectors/filter'
 
-import { assistantDeleteRequest } from '../../redux/actions/assistantActions'
+import { assistantDeleteRequest } from '../../../redux/actions/assistantActions'
 
 const AssistantList = () => {
   let assistants = useSelector(filterAssistantsSelector)
