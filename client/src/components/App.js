@@ -1,3 +1,4 @@
+import { BrowserRouter } from 'react-router-dom'
 import { Router as RouterHistory } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import Router from '../router'
@@ -29,9 +30,11 @@ function App() {
   else {
     return (
       <RouterHistory history={history}>
-        <Provider store={store}>
-          <Router />
-        </Provider>
+        <BrowserRouter basename='/AyudanteGrabacion'>
+          <Provider store={store}>
+            <Router />
+          </Provider>
+        </BrowserRouter>
       </RouterHistory>
     )
   }

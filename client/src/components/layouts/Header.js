@@ -9,7 +9,7 @@ const Header = (props) => {
       </div>
 
       <Link
-        to='/AyudanteGrabacion/logout'
+        to='/logout'
         className='flex items-center justify-center w-1/6 gap-5'
       >
         <span className='text-white text-sm font-normal'>

@@ -1,5 +1,11 @@
 import React, { lazy, Suspense } from 'react'
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  useLocation
+} from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import PublicRoute from './PublicRoute'
 import PageLoader from '../components/common/PageLoader'

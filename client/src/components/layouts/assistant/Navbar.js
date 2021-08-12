@@ -27,6 +27,7 @@ export default function MainNav() {
             <ViewGridIcon className='w-6 h-6' />
           </NavLink>
           <NavLink
+            exact
             to={`/report/${assistant_id}`}
             className='group flex justify-center items-center w-10 h-10 lg:w-14 lg:h-14 text-white opacity-50 rounded-xl group-hover:bg-gray-600 group-hover:opacity-100 group-hover:text-primary transform group-hover:-translate-y-8 lg:group-hover:-translate-y-0 lg:group-hover:translate-x-8 duration-300 group-hover:shadow-xl'
             activeClassName='bg-gray-600 rounded-xl text-white opacity-100'

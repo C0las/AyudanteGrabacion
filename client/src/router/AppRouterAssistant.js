@@ -1,7 +1,13 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { lazy, Suspense } from 'react'
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  useLocation
+} from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
