@@ -5,29 +5,9 @@ object-assign
 */
 
 /*!
- * rrule.js - Library for working with recurrence rules for calendar dates.
- * https://github.com/jakubroztocil/rrule
- *
- * Copyright 2010, Jakub Roztocil and Lars Schoning
- * Licenced under the BSD licence.
- * https://github.com/jakubroztocil/rrule/blob/master/LICENCE
- *
- * Based on:
- * python-dateutil - Extensions to the standard Python datetime module.
- * Copyright (c) 2003-2011 - Gustavo Niemeyer <gustavo@niemeyer.net>
- * Copyright (c) 2012 - Tomi Pieviläinen <tomi.pievilainen@iki.fi>
- * https://github.com/jakubroztocil/rrule/blob/master/LICENCE
- *
- */
-
-/*!
-* rrule.js - Library for working with recurrence rules for calendar dates.
-* https://github.com/jakubroztocil/rrule
-*
-* Copyright 2010, Jakub Roztocil and Lars Schoning
-* Licenced under the BSD licence.
-* https://github.com/jakubroztocil/rrule/blob/master/LICENCE
-*
+  Copyright (c) 2018 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
 */
 
 /*! *****************************************************************************
@@ -44,14 +24,6 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-
-/**
- * A better abstraction over CSS.
- *
- * @copyright Oleg Isonen (Slobodskoi) / Isonen 2014-present
- * @website https://github.com/cssinjs/jss
- * @license MIT
- */
 
 /** @license React v0.20.2
  * scheduler.production.min.js
@@ -97,5 +69,3 @@ PERFORMANCE OF THIS SOFTWARE.
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-//! moment.js
