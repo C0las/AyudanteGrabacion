@@ -23,11 +23,11 @@ const PaymentDetails = (props) => {
 
   const mostrar = () => {
     swal({
-      title: "titulo",
-      text: "texto de pana",
+      title: "Información bancaria",
+      text: "Datos guardados correctamente",
       icon: "success",
       button: "Aceptar",
-      timer: "600",
+      timer: "2000",
     });
   };
   const assistantRequest = {
@@ -47,13 +47,32 @@ const PaymentDetails = (props) => {
     bankName: "",
   });
 
+  const [adres, SetAddress] = useState({
+    street: "",
+    city: "",
+    commune: "",
+  });
+
   const update = (e) => {
     e.preventDefault();
     var list = payment;
-    assistantRequest.paymentDetails = list;
-    dispatch(assistantUpdateRequest(id, assistantRequest));
+    var listA = adres;
 
-    setPayment({ accountNumber: "", accountType: "", bankName: "" });
+    assistantRequest.paymentDetails = list;
+    assistantRequest.address = listA;
+
+    dispatch(assistantUpdateRequest(id, assistantRequest));
+    setPayment({
+      accountNumber: "",
+      accountType: "",
+      bankName: "",
+    });
+    adres({
+      street: "",
+      city: "",
+      commune: "",
+    });
+
     mostrar();
     history.push("/");
   };
@@ -61,6 +80,10 @@ const PaymentDetails = (props) => {
   const handleChange = (e) => {
     setPayment({
       ...payment,
+      [e.target.name]: e.target.value,
+    });
+    SetAddress({
+      ...adres,
       [e.target.name]: e.target.value,
     });
   };
@@ -84,65 +107,39 @@ const PaymentDetails = (props) => {
             Dirección Particular
           </h1>
         </p>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-2 gap-5 w-full">
           <div className="flex flex-col gap-3">
             <label className="uppercase tracking-wide text-black text-xs font-bold">
-              Número de cuenta:
+              calle:
             </label>
             <input
-              defaultValue={paymentDetails.accountNumber}
+              defaultValue={address.street}
               className=" bg-gray-200 text-black border border-gray-200 rounded h-10  w-full pl-3"
               onChange={(e) => handleChange(e)}
-              name="accountNumber"
+              name="street"
             />
           </div>
           <div className="flex flex-col gap-3">
             <label className="uppercase tracking-wide text-black text-xs font-bold">
-              Tipo de cuenta:
+              Ciudad:
             </label>
-            <select
-              defaultValue={paymentDetails.accountType}
-              className="bg-gray-200 border border-gray-200 text-black text-xs rounded h-10 pl-3 w-full "
+            <input
+              defaultValue={address.city}
+              className=" bg-gray-200 text-black border border-gray-200 rounded h-10  w-full pl-3"
               onChange={(e) => handleChange(e)}
-              name="accountType"
-            >
-              <option>CORRIENTE</option>
-              <option>VISTA</option>
-              <option>CUENTA RUT</option>
-              <option>AHORRO</option>
-            </select>
+              name="city"
+            />
           </div>
           <div className="flex flex-col gap-3">
             <label className="uppercase tracking-wide text-black text-xs font-bold">
-              Banco:
+              Ciudad:
             </label>
-            <select
-              defaultValue={paymentDetails.bankName}
-              className="bg-gray-200 border border-gray-200 text-black text-xs rounded h-10 pl-3 w-full "
+            <input
+              defaultValue={address.commune}
+              className=" bg-gray-200 text-black border border-gray-200 rounded h-10  w-full pl-3"
               onChange={(e) => handleChange(e)}
-              name="bankName"
-            >
-              <option>BANCO BCI</option>
-              <option>BANCO BBVA</option>
-              <option>BANCO BICE</option>
-              <option>BANCO CORP BANCA</option>
-              <option>BANCO CONSORCIO</option>
-              <option>BANCO COPEUCH</option>
-              <option>BANCO ESTADO</option>
-              <option>BANCO FALLABELLA</option>
-              <option>BANCO ITAU</option>
-              <option>BANCO INTERNACIONAL</option>
-              <option>BANCO PARIS</option>
-              <option>BANCO RIPLEY</option>
-              <option>BANCO SANTANDER</option>
-              <option>BANCO SCOTIABANK</option>
-              <option>BANCO SECURITY</option>
-              <option>BANCO CHILE/EDWARDS/CREDICHILE</option>
-              <option>BANCO DEL DESARROLLO</option>
-              <option>HSBC BANK</option>
-              <option>PREPAGO LOS HEROES</option>
-              <option>TENPO PREPAGO S.A.</option>
-            </select>
+              name="commune"
+            />
           </div>
         </div>
         <p>
@@ -157,6 +154,7 @@ const PaymentDetails = (props) => {
               Número de cuenta:
             </label>
             <input
+              type="number"
               defaultValue={paymentDetails.accountNumber}
               className=" bg-gray-200 text-black border border-gray-200 rounded h-10  w-full pl-3"
               onChange={(e) => handleChange(e)}
@@ -216,7 +214,7 @@ const PaymentDetails = (props) => {
           type="submit"
           className="bg-gray-900 text-white font-bold border-b-4 hover:border-b-2 border-gray-500 hover:border-gray-100 rounded-full h-10 mt-6"
         >
-          Guardar información
+          Guardar datos
         </button>
       </form>
     </div>
