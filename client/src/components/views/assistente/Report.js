@@ -47,7 +47,7 @@ export default class Report extends React.Component {
       text: "Guardados correctamente",
       icon: "success",
       button: "Aceptar",
-      timer: "1000",
+      timer: "800",
     });
   };
   onSubmit = async (e) => {
