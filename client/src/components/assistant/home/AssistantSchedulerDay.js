@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { format } from 'date-fns'
 import { LocationMarkerIcon, UserIcon } from '@heroicons/react/outline'
 import {
-  fetchSelectedAssistant,
+  assistantUpdateRequest,
   setCurrentDay
 } from '../../../redux/actions/assistantActions'
 import {
+  filterAssistantDaysLengthSelector,
   filterAssistantSchedulerSelector,
-  filterAssistantsDaySelector
+  filterAssistantsDaySelector,
+  filterAssistantSelector
 } from '../../../redux/selectors/filter'
-
+import Modal from '../../common/Modal'
 import { ReactComponent as Calendario } from '../../../assets/calendario.svg'
-import { fetchSchedulers } from '../../../redux/actions/schedulerActions'
 
 function AssistantSchedulerDay() {
   const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
@@ -22,8 +23,39 @@ function AssistantSchedulerDay() {
   const data = useSelector(filterAssistantSchedulerSelector)
   const dataByDay = useSelector(filterAssistantsDaySelector(data))
 
+  const assistant = useSelector(filterAssistantSelector)
+  const isDaysEmpty = useSelector(filterAssistantDaysLengthSelector)
+
+  const assistantId = useSelector((state) => state.auth)
+  const loading = useSelector((state) => state.assistant.loading)
+
+  const { name, lastName, rut, email, fono } = assistant
+  const daysAvailable = assistant.daysAvailable
+  const address = assistant.address
+  const paymentDetails = assistant.paymentDetails || {}
+
+  const assistantRequest = {
+    name: name,
+    lastName: lastName,
+    rut: rut,
+    email: email,
+    fono: fono,
+    daysAvailable: daysAvailable,
+    address: address,
+    paymentDetails: paymentDetails
+  }
+
+  const update = (e) => {
+    var list = e
+    assistantRequest.daysAvailable = list
+    dispatch(
+      assistantUpdateRequest(assistantId.current.assistant, assistantRequest)
+    )
+  }
+
   return (
     <>
+      {isDaysEmpty === 0 && <Modal update={update} loading={loading} />}
       <select
         defaultValue={today}
         onChange={(e) => dispatch(setCurrentDay(e.target.value))}

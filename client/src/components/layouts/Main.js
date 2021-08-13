@@ -15,7 +15,7 @@ const Main = (props) => {
     )
   } else {
     return (
-      <div className='flex flex-row bg-primary-light overflow-hidden'>
+      <div className='flex flex-row h-screen bg-primary-light overflow-hidden'>
         <Navbar />
         <div className='flex flex-col w-screen'>
           <Header term={props.term} searchKeyword={props.searchKeyword} />

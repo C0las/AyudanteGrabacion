@@ -13,8 +13,20 @@ export default class Report extends React.Component {
     name: '',
     motivo: '',
     observacion: '',
-    clase: '',
-    lastName: ''
+    clase: ''
+  }
+
+  name = (data) => {
+    const indexName = data.name.indexOf(' ')
+    const indexLastName = data.lastName.indexOf(' ')
+
+    var name = data.name.substr(0, indexName)
+    var lastName = data.lastName.substr(0, indexLastName)
+
+    if (name === '') name = data.name
+    if (lastName === '') lastName = data.lastName
+
+    return name + ' ' + lastName
   }
 
   async componentDidMount() {
@@ -24,8 +36,7 @@ export default class Report extends React.Component {
     )
     console.log(res.data)
     this.setState({
-      lastName: res.data.lastName,
-      name: res.data.name
+      name: this.name(res.data)
     })
   }
 

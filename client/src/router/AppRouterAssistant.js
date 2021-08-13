@@ -34,13 +34,7 @@ const Logout = lazy(() => import('../components/views/Logout'))
 const NotFound = lazy(() => import('../components/views/NotFound'))
 
 export default function AppRouterAssistant() {
-  const dispatch = useDispatch()
-  const id = useSelector(idAssistant)
   const location = useLocation()
-  dispatch(fetchSelectedAssistant(id))
-  useEffect(() => {
-    dispatch(fetchSchedulers)
-  }, [])
 
   return (
     <Suspense fallback={<PageLoader />}>

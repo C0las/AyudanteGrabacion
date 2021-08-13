@@ -57,5 +57,5 @@ export const filterAssistantSelector = createSelector(
 
 export const filterAssistantDaysLengthSelector = createSelector(
   [assistantSelect],
-  (assistant) => assistant.assistant.daysAvailable.length
+  (assistant) => assistant.assistant.daysAvailable?.length
 )
