@@ -81,7 +81,6 @@ const PaymentDetails = (props) => {
     async function asyncFetch() {
       dispatch(fetchSelectedAssistant(id));
     }
-
     asyncFetch();
   }, [dispatch, id]);
 
