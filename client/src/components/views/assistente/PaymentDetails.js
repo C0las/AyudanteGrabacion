@@ -62,17 +62,6 @@ const PaymentDetails = (props) => {
     assistantRequest.address = listA;
 
     dispatch(assistantUpdateRequest(id, assistantRequest));
-    setPayment({
-      accountNumber: "",
-      accountType: "",
-      bankName: "",
-    });
-    adres({
-      street: "",
-      city: "",
-      commune: "",
-    });
-
     mostrar();
     history.push("/");
   };
