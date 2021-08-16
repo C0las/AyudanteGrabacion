@@ -1,5 +1,5 @@
-import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import swal from 'sweetalert'
 import CardAssistant from './CardAssistant'
 import CardAssistantLoading from '../../common/CardAssistantLoading'
 import { filterAssistantsSelector } from '../../../redux/selectors/filter'
@@ -12,7 +12,19 @@ const AssistantList = () => {
   const dispatch = useDispatch()
 
   const removeAssistantHandler = (id) => {
-    dispatch(assistantDeleteRequest(id))
+    swal({
+      title: '¿Estás seguro?',
+      text: 'Una vez eliminado, ¡no podrá recuperar este ayudante!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal('¡El ayudante ha sido eliminado correctamente!', {
+          icon: 'success'
+        }).then(() => dispatch(assistantDeleteRequest(id)))
+      }
+    })
   }
 
   const renderAssistant = assistants.map((assistant, index) => {

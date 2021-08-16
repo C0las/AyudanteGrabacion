@@ -11,6 +11,7 @@ const Assistant = lazy(() => import('../components/views/Assistant'))
 const AssistantDetail = lazy(() =>
   import('../components/views/AssistantDetail')
 )
+const Report = lazy(() => import('../components/views/Report'))
 const Logout = lazy(() => import('../components/views/Logout'))
 const NotFound = lazy(() => import('../components/views/NotFound'))
 
@@ -21,17 +22,14 @@ export default function AppRouterAdmin() {
     <Suspense fallback={<PageLoader />}>
       <AnimatePresence exitBeforeEnter initial={false}>
         <Switch location={location} key={location.pathname}>
-          <PrivateRoute exact path='/'>
-            <Redirect to='/schedule' />
-          </PrivateRoute>
-
-          <PrivateRoute path='/schedule' component={Schedule} exact />
-          <PrivateRoute component={Assistant} path='/assistant' exact />
+          <PrivateRoute path='/' component={Schedule} exact />
+          <PrivateRoute component={Assistant} exact path='/assistant' />
           <PrivateRoute
             component={AssistantDetail}
             exact
             path='/assistant/assistantDetail/:id'
           />
+          <PrivateRoute component={Report} exact path='/report' />
           <PrivateRoute component={Logout} path='/logout' exact />
           <PublicRoute path='/login' render={() => <Redirect to='/' />} />
           <Route

@@ -1,6 +1,5 @@
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
-import { useSelector } from 'react-redux'
 import { createSelector } from 'reselect'
 
 const assistantSelect = (state) => state.assistant

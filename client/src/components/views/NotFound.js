@@ -1,31 +1,26 @@
 import React, { useEffect } from 'react'
-import { Button, Result } from 'antd'
-import history from '../../utils/history'
+import { useHistory, Link } from 'react-router-dom'
 const NotFound = () => {
+  const history = useHistory()
+
   useEffect(() => {
     history.replace('/notfound')
-  }, [])
+  }, [history])
+
   return (
-    <div className='bg-primary-light'>
-      <div className='w-9/12 m-auto py-16 min-h-screen flex items-center justify-center'>
-        <div className='bg-white shadow overflow-hidden sm:rounded-lg pb-8'>
-          <div className='border-t border-gray-200 text-center pt-8'>
-            <h1 className='text-9xl font-bold text-purple-400'>404</h1>
-            <h1 className='text-6xl font-medium py-8'>
-              oops! Página no encontrada.
-            </h1>
-            <p className='text-2xl pb-8 px-12 font-medium'>
-              Oops! La página que busca no existe. Es posible que haya sido
-              movida o eliminada.
-            </p>
-            <button className='bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md mr-6'>
-              HOME
-            </button>
-            <button className='bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-500 text-white font-semibold px-6 py-3 rounded-md'>
-              Contact Us
-            </button>
-          </div>
-        </div>
+    <div className='p-10 h-screen'>
+      <div className='flex flex-col items-center justify-center bg-404 h-full rounded-lg'>
+        <h2 className='text-9xl text-white font-extrabold'>404</h2>
+        <h4 className='text-3xl text-white mb-6'>Opps! Pagina no encontrada</h4>
+        <p className='text-lg font-medium text-white'>
+          La pagina que buscas no existe. Es posible que haya sido movida o
+          eliminada
+        </p>
+        <Link to='/'>
+          <button className='bg-pink-700 text-white rounded-3xl px-6 py-3 mt-6 border-b-4 border-pink-900'>
+            Volver al inicio
+          </button>
+        </Link>
       </div>
     </div>
   )

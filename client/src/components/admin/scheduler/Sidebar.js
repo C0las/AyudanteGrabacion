@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { format } from 'date-fns'
+import { es } from 'date-fns/locale'
 import { motion } from 'framer-motion'
 
 function Sidebar() {
@@ -9,8 +10,7 @@ function Sidebar() {
   console.log(assistants.map((val) => val.name))
 
   const date = new Date()
-  const formate = format(date, 'dd MMM, yyyy')
-  const dateDay = format(date, 'cccc')
+  const formate = format(date, 'dd MMM, yyyy', { locale: es })
 
   function days(day) {
     var dayOfWeek = ''

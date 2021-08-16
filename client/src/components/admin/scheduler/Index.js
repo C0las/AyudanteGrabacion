@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   ViewState,
@@ -16,16 +16,34 @@ import {
   Resources,
   AppointmentForm
 } from '@devexpress/dx-react-scheduler-material-ui'
-import { format } from 'date-fns'
 import AppointmentContent from '../../common/AppointmentContent'
 import { setSchedulers } from '../../../redux/actions/schedulerActions'
+import { hourWork, hourWork1 } from '../../../redux/selectors/calculated'
 
 function SchedulerContainer() {
   const dispatch = useDispatch()
-  const data = useSelector((state) => state.allScheduler.scheduler)
+  const data = useSelector((state) => state.allScheduler?.scheduler)
   const schools = useSelector((state) => state.allScheduler.schools)
 
-  console.log(data)
+  const [appoint, setAppoint] = useState({ data: data })
+  const datee = useSelector(hourWork1)
+
+  const test = () => {
+    const hour = datee.map((e) => e.hour)
+    const minute = datee.map((e) => e.minute)
+
+    let horas = hour.reduce((a, b) => a + b, 0)
+    let minutos = minute.reduce((a, b) => a + b, 0)
+
+    if (minutos >= 60) {
+      // Divide minutes by 60 and add result to hours
+      horas += Math.floor(minutos / 60)
+      // Add remainder of totalM / 60 to minutes
+      minutos = minutos % 60
+    }
+
+    return horas + 'h' + minutos
+  }
 
   const handleButtonClick = (schoolName, schools) => {
     if (schools.indexOf(schoolName) > -1) {
@@ -124,10 +142,34 @@ function SchedulerContainer() {
     }
   ]
 
+  const commitChanges = ({ added, changed, deleted }) => {
+    setAppoint((state) => {
+      let { data } = state
+      if (added) {
+        const startingAddedId =
+          data.length > 0 ? data[data.length - 1].id + 1 : 0
+        data = [...data, { id: startingAddedId, ...added }]
+      }
+      if (changed) {
+        data = data.map((appointment) =>
+          changed[appointment.id]
+            ? { ...appointment, ...changed[appointment.id] }
+            : appointment
+        )
+      }
+      if (deleted !== undefined) {
+        data = data.filter((appointment) => appointment.id !== deleted)
+      }
+      return { data }
+    })
+  }
+
   return (
     <div className='bg-white rounded-l-lg '>
       <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1} height={520}>
         <ViewState currentDate='2021-06-28' />
+        <EditingState onCommitChanges={commitChanges} />
+        <IntegratedEditing />
         <DayView startDayHour={9} endDayHour={19} excludedDays={[0, 6]} />
         <WeekView
           displayName='Semanas'
