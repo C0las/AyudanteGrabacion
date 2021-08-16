@@ -37,10 +37,10 @@ export const filterAssistant = (current) => (dispatch) => {
   })
 }
 
-export const setCurrentDay = (current) => (dispatch) => {
+export const setCurrentDay = (currentDay) => (dispatch) => {
   dispatch({
     type: ActionTypes.SET_CURRENT_DAY,
-    payload: current
+    payload: currentDay
   })
 }
 

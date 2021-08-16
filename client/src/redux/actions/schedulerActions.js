@@ -10,6 +10,16 @@ export const fetchSchedulers = async (dispatch) => {
   }
 }
 
+export const schedulerAddRequest = (scheduler) => async (dispatch) => {
+  try {
+    await api.post('schedule', scheduler).then(({ data }) => data)
+    dispatch({ type: ActionTypes.ADD_SCHEDULER })
+    dispatch(fetchSchedulers)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 // Modifica o Actualiza el 'state' del calendario
 export const setSchedulers = (schedulers) => {
   return {

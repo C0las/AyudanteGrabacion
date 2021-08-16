@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  ViewState,
-  EditingState,
-  IntegratedEditing
-} from '@devexpress/dx-react-scheduler'
+import { ViewState } from '@devexpress/dx-react-scheduler'
 import {
   Scheduler,
   WeekView,
@@ -14,16 +10,22 @@ import {
   DayView,
   ViewSwitcher,
   Resources,
-  AppointmentForm
+  AppointmentForm,
+  AppointmentTooltip,
+  CurrentTimeIndicator
 } from '@devexpress/dx-react-scheduler-material-ui'
 import AppointmentContent from '../../common/AppointmentContent'
-import { setSchedulers } from '../../../redux/actions/schedulerActions'
+import {
+  setCurrentDate,
+  setSchedulers
+} from '../../../redux/actions/schedulerActions'
 import { hourWork, hourWork1 } from '../../../redux/selectors/calculated'
 
 function SchedulerContainer() {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.allScheduler?.scheduler)
   const schools = useSelector((state) => state.allScheduler.schools)
+  const currentDate = useSelector((state) => state.allScheduler.currentDate)
 
   const [appoint, setAppoint] = useState({ data: data })
   const datee = useSelector(hourWork1)
@@ -45,16 +47,16 @@ function SchedulerContainer() {
     return horas + 'h' + minutos
   }
 
-  const handleButtonClick = (schoolName, schools) => {
+  /*const handleButtonClick = (schoolName, schools) => {
     if (schools.indexOf(schoolName) > -1) {
       return schools.filter((school) => school !== schoolName)
     }
     const nextSchools = [...schools]
     nextSchools.push(schoolName)
     return nextSchools
-  }
+  }*/
 
-  const LocationSelector = (props) => (
+  /*const LocationSelector = (props) => (
     <div className='flex items-center gap-2'>
       {props.schools.map((school) => {
         console.log(school)
@@ -82,49 +84,22 @@ function SchedulerContainer() {
         )
       })}
     </div>
-  )
+  )*/
 
   const FlexibleSpace = ({ ...restProps }) => (
     <Toolbar.FlexibleSpace
       {...restProps}
       className='flex flex-row items-center justify-center m-auto gap-2'
     >
-      <LocationSelector schools={schools} />
+      {/*<LocationSelector schools={schools} />*/}
     </Toolbar.FlexibleSpace>
   )
-
-  const isRestTime = (date) =>
-    date.getDay() === 0 ||
-    date.getDay() === 6 ||
-    date.getHours() < 9 ||
-    date.getHours() >= 18
-
-  const TimeTableCell = ({ ...restProps }) => {
-    const { startDate } = restProps
-    if (isRestTime(startDate)) {
-      return <WeekView.TimeTableCell {...restProps} className='bg-gray-100' />
-    }
-    return <WeekView.TimeTableCell {...restProps} />
-  }
-
-  const DayScaleCell = ({ ...restProps }) => {
-    const { startDate } = restProps
-    if (startDate.getDay() === 0 || startDate.getDay() === 6) {
-      return (
-        <WeekView.DayScaleCell
-          {...restProps}
-          className='bg-gray-100 text-red-500'
-        />
-      )
-    }
-    return <WeekView.DayScaleCell {...restProps} />
-  }
 
   const DEPARTMENT = [
     'Preparador Físico',
     'Actuación',
     'Sonido',
-    'Administración de Redes y Telecomunicaciones',
+    'Redes y Telecomunicaciones',
     'Audiovisual'
   ]
 
@@ -142,46 +117,34 @@ function SchedulerContainer() {
     }
   ]
 
-  const commitChanges = ({ added, changed, deleted }) => {
-    setAppoint((state) => {
-      let { data } = state
-      if (added) {
-        const startingAddedId =
-          data.length > 0 ? data[data.length - 1].id + 1 : 0
-        data = [...data, { id: startingAddedId, ...added }]
-      }
-      if (changed) {
-        data = data.map((appointment) =>
-          changed[appointment.id]
-            ? { ...appointment, ...changed[appointment.id] }
-            : appointment
-        )
-      }
-      if (deleted !== undefined) {
-        data = data.filter((appointment) => appointment.id !== deleted)
-      }
-      return { data }
-    })
-  }
-
   return (
     <div className='bg-white rounded-l-lg '>
       <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1} height={520}>
-        <ViewState currentDate='2021-06-28' />
-        <EditingState onCommitChanges={commitChanges} />
-        <IntegratedEditing />
-        <DayView startDayHour={9} endDayHour={19} excludedDays={[0, 6]} />
-        <WeekView
-          displayName='Semanas'
-          startDayHour={7}
+        <ViewState
+          currentDate={currentDate}
+          onCurrentDateChange={(currentDate) =>
+            dispatch(setCurrentDate(currentDate))
+          }
+          defaultCurrentViewName='Week'
+        />
+
+        <DayView
+          displayName='Dias'
+          startDayHour={8}
           endDayHour={21}
           excludedDays={[0, 6]}
-          timeTableCellComponent={TimeTableCell}
-          dayScaleCellComponent={DayScaleCell}
+        />
+        <WeekView
+          displayName='Semanas'
+          startDayHour={8}
+          endDayHour={21}
+          excludedDays={[0, 6]}
         />
 
         <Appointments appointmentContentComponent={AppointmentContent} />
+        <AppointmentTooltip showCloseButton />
         <AppointmentForm />
+        <CurrentTimeIndicator shadePreviousCells={false} />
         <Resources data={resources} />
         <Toolbar flexibleSpaceComponent={FlexibleSpace} />
         <DateNavigator />

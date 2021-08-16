@@ -1,6 +1,7 @@
 import Filter from '../common/Filter'
 import { Link } from 'react-router-dom'
 import ModalRe from '../common/ModalRe'
+import swal from 'sweetalert'
 import { useState } from 'react'
 
 import {
@@ -8,7 +9,7 @@ import {
   LocationMarkerIcon,
   UserIcon
 } from '@heroicons/react/outline'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import DateFnsUtils from '@date-io/date-fns' // choose your lib
 import {
@@ -21,21 +22,24 @@ import {
 
 import { es } from 'date-fns/locale'
 import format from 'date-fns/format'
+import { schedulerAddRequest } from '../../redux/actions/schedulerActions'
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [department, setDepartment] = useState(['Preparador Físico'])
   const [selectedForm, setSelectedForm] = useState({
     school: '',
-    department: '',
-    startDay: new Date(),
-    endDay: new Date(),
+    departament: '',
+    startDate: Date,
+    endDate: Date,
     teacher: '',
-    location: '',
-    assistant: ''
+    title: '',
+    assistant: '',
+    confirmationTurn: 'Pendiente'
   })
   const schools = useSelector((state) => state.allScheduler.schools)
   const assistant = useSelector((state) => state.allAssistants.assistants)
+  const dispatch = useDispatch()
 
   const [selectedStartDate, handleStartDateChange] = useState(new Date())
   const [selectedEndDate, handleEndDateChange] = useState(new Date())
@@ -43,17 +47,28 @@ const Header = (props) => {
   const handleChange = (e) => {
     setSelectedForm({
       ...selectedForm,
+      startDate: selectedStartDate,
+      endDate: selectedEndDate,
       [e.target.name]: e.target.value
     })
   }
 
-  console.log(selectedForm)
+  const insert = (e) => {
+    e.preventDefault()
+    var data = selectedForm
+    dispatch(schedulerAddRequest(data))
+    swal(
+      'Añadir Clase',
+      '¡La clase se ha añadido correctamente!',
+      'success'
+    ).then(() => setIsOpen(false))
+  }
 
   return (
     <>
       <ModalRe open={isOpen} title='Agregar Clase'>
         <>
-          <form>
+          <div>
             <div className='flex flex-col mt-6'>
               <MuiPickersUtilsProvider utils={DateFnsUtils} locale={es}>
                 <div className='flex flex-row items-center justify-between gap-3'>
@@ -64,7 +79,7 @@ const Header = (props) => {
                     value={selectedStartDate}
                     InputAdornmentProps={{ position: 'start' }}
                     minDate={new Date()}
-                    onChange={(e) => handleChange(e)}
+                    onChange={handleStartDateChange}
                     ampm={false}
                     format='dd/MM/yyyy HH:mm'
                     name='startDate'
@@ -77,7 +92,7 @@ const Header = (props) => {
                     value={selectedEndDate}
                     InputAdornmentProps={{ position: 'start' }}
                     minDate={new Date()}
-                    onChange={(e) => handleChange(e)}
+                    onChange={handleEndDateChange}
                     ampm={false}
                     format='dd/MM/yyyy HH:mm'
                     name='endDate'
@@ -118,7 +133,7 @@ const Header = (props) => {
               </div>
 
               <div className='flex flex-row items-center gap-3'>
-                <select name='department' onChange={(e) => handleChange(e)}>
+                <select name='departament' onChange={(e) => handleChange(e)}>
                   <option>Seleccionar Carrera</option>
                   {department.map((e) => (
                     <option>{e}</option>
@@ -132,7 +147,7 @@ const Header = (props) => {
                 <LocationMarkerIcon className='h-4 w-4' />
                 <input
                   onChange={(e) => handleChange(e)}
-                  name='location'
+                  name='title'
                   type='text'
                   placeholder='Añadir una sala'
                 />
@@ -149,27 +164,33 @@ const Header = (props) => {
               </div>
             </div>
 
+            <select
+              onChange={(e) => handleChange(e)}
+              name='assistant'
+              className='flex items-center justify-center w-full px-4 py-2 mt-4'
+            >
+              <option>Seleccionar Ayudante</option>
+              {assistant.map((e) => (
+                <option value={e._id}>{e.name}</option>
+              ))}
+            </select>
             <div className='flex flex-row items-center justify-between gap-3 mt-4 '>
-              <select
-                onChange={(e) => handleChange(e)}
-                name='assistant'
-                className='flex items-center justify-center px-4 py-2'
-              >
-                <option>Seleccionar Ayudante</option>
-                {assistant.map((e) => (
-                  <option value={e._id}>{e.name}</option>
-                ))}
-              </select>
-
               <button
-                onClick={() => setIsOpen(false)}
                 type='button'
+                onClick={(e) => insert(e)}
                 className='flex flex-row w-full mt-4 items-center justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
               >
                 Añadir
               </button>
+
+              <button
+                className='flex flex-row w-full mt-4 items-center justify-center px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
+                onClick={() => setIsOpen(false)}
+              >
+                Cancelar
+              </button>
             </div>
-          </form>
+          </div>
         </>
       </ModalRe>
 

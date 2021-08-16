@@ -58,7 +58,7 @@ function AssistantSchedulerWeek() {
             dispatch(setCurrentDate(currentDate))
           }
         />
-        <WeekView startDayHour={7} endDayHour={21} excludedDays={[0, 6]} />
+        <WeekView startDayHour={8} endDayHour={21} excludedDays={[0, 6]} />
         <Appointments appointmentContentComponent={AppointmentContent} />
         <AppointmentTooltip showCloseButton showOpenButton />
         <CurrentTimeIndicator shadePreviousCells={false} />
