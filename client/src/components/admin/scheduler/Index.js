@@ -118,39 +118,37 @@ function SchedulerContainer() {
   ]
 
   return (
-    <div className='bg-white rounded-l-lg '>
-      <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1} height={520}>
-        <ViewState
-          currentDate={currentDate}
-          onCurrentDateChange={(currentDate) =>
-            dispatch(setCurrentDate(currentDate))
-          }
-          defaultCurrentViewName='Week'
-        />
+    <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1} height={540}>
+      <ViewState
+        currentDate={currentDate}
+        onCurrentDateChange={(currentDate) =>
+          dispatch(setCurrentDate(currentDate))
+        }
+        defaultCurrentViewName='Week'
+      />
 
-        <DayView
-          displayName='Dias'
-          startDayHour={8}
-          endDayHour={21}
-          excludedDays={[0, 6]}
-        />
-        <WeekView
-          displayName='Semanas'
-          startDayHour={8}
-          endDayHour={21}
-          excludedDays={[0, 6]}
-        />
+      <DayView
+        displayName='Dias'
+        startDayHour={8}
+        endDayHour={21}
+        excludedDays={[0, 6]}
+      />
+      <WeekView
+        displayName='Semanas'
+        startDayHour={8}
+        endDayHour={21}
+        excludedDays={[0, 6]}
+      />
 
-        <Appointments appointmentContentComponent={AppointmentContent} />
-        <AppointmentTooltip showCloseButton />
-        <AppointmentForm />
-        <CurrentTimeIndicator shadePreviousCells={false} />
-        <Resources data={resources} />
-        <Toolbar flexibleSpaceComponent={FlexibleSpace} />
-        <DateNavigator />
-        <ViewSwitcher />
-      </Scheduler>
-    </div>
+      <Appointments appointmentContentComponent={AppointmentContent} />
+      <AppointmentTooltip showCloseButton />
+      <AppointmentForm />
+      <CurrentTimeIndicator shadePreviousCells={false} />
+      <Resources data={resources} />
+      <Toolbar flexibleSpaceComponent={FlexibleSpace} />
+      <DateNavigator />
+      <ViewSwitcher />
+    </Scheduler>
   )
 }
 

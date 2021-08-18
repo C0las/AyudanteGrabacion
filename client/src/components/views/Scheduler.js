@@ -15,7 +15,7 @@ function Scheduler() {
   }, [dispatch])
 
   return (
-    <div className='flex flex-row h-screen w-full'>
+    <div className='flex flex-row'>
       <Sheduler />
       <Sidebar />
     </div>

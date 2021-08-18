@@ -19,6 +19,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={(props) =>
         authService.token.get() ? (
           <motion.div
+            className='flex flex-row w-full rounded-t-3xl lg:rounded-l-3xl bg-white'
             transition={config}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

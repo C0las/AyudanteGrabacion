@@ -26,7 +26,7 @@ export default function Report() {
   }, [dispatch])
 
   return (
-    <div className='flex flex-col p-10 gap-5 h-screen w-full bg-white '>
+    <div className='flex flex-col p-10 gap-5 h-screen w-full '>
       <div className='flex flex-row items-baseline w-full pl-5 pr-5 gap-3'>
         <h1 className='text-2xl text-gray-700 font-semibold'>REPORTES</h1>
         <h1 className='align-text-bottom text-sm text-gray-400 font-normal'>

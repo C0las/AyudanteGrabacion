@@ -1,27 +1,15 @@
 import Filter from '../common/Filter'
-import { Link } from 'react-router-dom'
 import ModalRe from '../common/ModalRe'
 import swal from 'sweetalert'
 import { useState } from 'react'
 
-import {
-  CalendarIcon,
-  LocationMarkerIcon,
-  UserIcon
-} from '@heroicons/react/outline'
+import { LocationMarkerIcon, UserIcon } from '@heroicons/react/outline'
 import { useDispatch, useSelector } from 'react-redux'
 
 import DateFnsUtils from '@date-io/date-fns' // choose your lib
-import {
-  DatePicker,
-  TimePicker,
-  DateTimePicker,
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers'
+import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers'
 
 import { es } from 'date-fns/locale'
-import format from 'date-fns/format'
 import { schedulerAddRequest } from '../../redux/actions/schedulerActions'
 
 const Header = (props) => {
@@ -68,7 +56,7 @@ const Header = (props) => {
     <>
       <ModalRe open={isOpen} title='Agregar Clase'>
         <>
-          <div>
+          <div className=''>
             <div className='flex flex-col mt-6'>
               <MuiPickersUtilsProvider utils={DateFnsUtils} locale={es}>
                 <div className='flex flex-row items-center justify-between gap-3'>
@@ -126,8 +114,8 @@ const Header = (props) => {
                   }}
                 >
                   <option>Seleccionar Escuela</option>
-                  {schools.map((e) => (
-                    <option>{e}</option>
+                  {schools.map((e, key) => (
+                    <option key={key}>{e}</option>
                   ))}
                 </select>
               </div>
@@ -135,8 +123,8 @@ const Header = (props) => {
               <div className='flex flex-row items-center gap-3'>
                 <select name='departament' onChange={(e) => handleChange(e)}>
                   <option>Seleccionar Carrera</option>
-                  {department.map((e) => (
-                    <option>{e}</option>
+                  {department.map((e, key) => (
+                    <option key={key}>{e}</option>
                   ))}
                 </select>
               </div>
@@ -170,8 +158,10 @@ const Header = (props) => {
               className='flex items-center justify-center w-full px-4 py-2 mt-4'
             >
               <option>Seleccionar Ayudante</option>
-              {assistant.map((e) => (
-                <option value={e._id}>{e.name}</option>
+              {assistant.map((e, key) => (
+                <option key={key} value={e._id}>
+                  {e.name}
+                </option>
               ))}
             </select>
             <div className='flex flex-row items-center justify-between gap-3 mt-4 '>
@@ -194,29 +184,17 @@ const Header = (props) => {
         </>
       </ModalRe>
 
-      <div className='flex items-center justify-between bg-primary-light w-full h-20 p-10'>
-        <div className='flex items-center justify-start w-2/5'>
+      <div className='flex flex-row items-center justify-between  bg-primary-light h-20 p-3'>
+        <div className='flex flex-row items-center justify-start w-2/5'>
           <Filter term={props.term} searchKeyword={props.searchKeyword} />
         </div>
 
-        <div className='flex flex-row items-center w-1/4 gap-2 mr-4'>
-          <button
-            onClick={() => setIsOpen(true)}
-            className='bg-blue-800 hover:bg-blue-600 text-white text-xs rounded-lg p-2'
-          >
-            Añadir Turno
-          </button>
-          <Link to='/logout' className='flex flex-row items-center gap-3 ml-2'>
-            <span className='text-white text-sm font-normal'>
-              ¡Hola, <span className='text-white font-bold'>Sara Moro!</span>
-            </span>
-            <img
-              className='inline-block ring-2 ring-white rounded-full w-9 h-9'
-              src='https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-              alt=''
-            />
-          </Link>
-        </div>
+        <button
+          onClick={() => setIsOpen(true)}
+          className='bg-blue-800 hover:bg-blue-600 text-white text-xs rounded-lg p-2'
+        >
+          Añadir Turno
+        </button>
       </div>
     </>
   )

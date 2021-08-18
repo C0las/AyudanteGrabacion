@@ -16,7 +16,7 @@ export default function MainNav() {
   const assistant_id = useSelector(idAssistant)
   return (
     <div className='fixed lg:static bottom-0 w-full lg:w-24 lg:h-full z-10'>
-      <div className=' lg:w-24 bg-primary rounded-t-lg lg:rounded-r-lg lg:rounded-t-none  relative'>
+      <div className='lg:w-24 bg-primary rounded-t-lg lg:rounded-r-lg lg:rounded-t-none  relative'>
         <div className='flex lg:flex-col items-center justify-center lg:h-screen space-x-4 lg:space-y-4 lg:space-x-0 py-2 lg:py-4'>
           <NavLink
             exact
