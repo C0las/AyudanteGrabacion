@@ -1,25 +1,9 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { lazy, Suspense } from 'react'
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-  useLocation
-} from 'react-router-dom'
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import PageLoader from '../components/common/PageLoader'
-
-import { fetchSchedulers } from '../redux/actions/schedulerActions'
-import {
-  fetchSelectedAssistant,
-  assistantUpdateRequest
-} from '../redux/actions/assistantActions'
-
-import { idAssistant } from '../redux/selectors/auth'
 
 // Ayudante
 const Home = lazy(() => import('../components/views/assistente/Home'))

@@ -1,20 +1,12 @@
 import React, { lazy, Suspense } from 'react'
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-  useLocation
-} from 'react-router-dom'
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import PublicRoute from './PublicRoute'
 import PageLoader from '../components/common/PageLoader'
 
 const Login = lazy(() => import('../components/views/Login'))
 
-/*const NotFound = lazy(() =>
-  import("@/pages/NotFound")
-)*/
+const NotFound = lazy(() => import('../components/views/NotFound'))
 
 export default function AuthRouter() {
   const location = useLocation()
@@ -28,11 +20,11 @@ export default function AuthRouter() {
             render={() => <Redirect to='/login' />}
           />
           <PublicRoute component={Login} path='/login' exact />
-          {/*<Route
-            path="*"
+          <Route
+            path='*'
             component={NotFound}
-            render={() => <Redirect to="/notfound" />}
-          />*/}
+            render={() => <Redirect to='/notfound' />}
+          />
         </Switch>
       </AnimatePresence>
     </Suspense>

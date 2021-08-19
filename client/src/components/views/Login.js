@@ -17,7 +17,6 @@ const LoginPage = () => {
   })
 
   const dispatch = useDispatch()
-
   const { loading: isLoading } = useSelector(selectAuth)
 
   const handleInput = (event) => {
@@ -82,21 +81,6 @@ const LoginPage = () => {
               />
             </div>
             <div className='flex flex-row justify-between items-center gap-10 lg:gap-28'>
-              <div className='flex items-center'>
-                <input
-                  id='remember-me'
-                  name='remember-me'
-                  type='checkbox'
-                  className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
-                />
-                <label
-                  htmlFor='remember-me'
-                  className='ml-2 block text-sm text-gray-900'
-                >
-                  Recuerdame
-                </label>
-              </div>
-
               <button
                 type='submit'
                 className='group relative w-full h-10 flex flex-row items-center justify-center border border-transparent text-sm font-medium rounded-md text-white bg-blue-800 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'

@@ -6,11 +6,7 @@ import {
 } from '@heroicons/react/outline'
 
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  fetchSelectedAssistant,
-  assistantUpdateRequest
-} from '../../../redux/actions/assistantActions'
-import { filterAssistantSelector } from '../../../redux/selectors/filter'
+import { fetchSelectedAssistant } from '../../../redux/actions/assistantActions'
 import SchedulerByWeek from '../../assistant/home/AssistantSchedulerWeek'
 import SchedulerByDay from '../../assistant/home/AssistantSchedulerDay'
 import { idAssistant } from '../../../redux/selectors/auth'
@@ -36,7 +32,7 @@ export default function Home() {
 
   return (
     <>
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col w-full items-center'>
         <div className='flex flex-row items-center justify-between w-full pl-10 pr-10 mt-5'>
           <h1 className='text-lg text-gray-700 font-semibold select-none'>
             Horario

@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { lazy, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { fetchAssistants } from '../../redux/actions/assistantActions'
 import { fetchSchedulers } from '../../redux/actions/schedulerActions'
 

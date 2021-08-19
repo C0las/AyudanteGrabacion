@@ -1,5 +1,3 @@
-import { format } from 'date-fns'
-import { es } from 'date-fns/locale'
 import { createSelector } from 'reselect'
 
 export const hourWork = createSelector(

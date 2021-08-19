@@ -5,7 +5,6 @@ import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchReports } from '../../redux/actions/reportsActions'
-import { filterReportSchedulerSelector } from '../../redux/selectors/filter'
 import { fetchSchedulers } from '../../redux/actions/schedulerActions'
 import { LocationMarkerIcon, UserIcon } from '@heroicons/react/outline'
 
@@ -17,8 +16,6 @@ export default function Report() {
   const scheduler = useSelector((state) => state.allScheduler?.scheduler)
   let reportSkip = reports.slice(skip, skip + 10)
   let reportsTotal = reports.length
-
-  const motivo = ['Registro de Alumnos', 'Suspención de Clases']
 
   useEffect(() => {
     dispatch(fetchReports)

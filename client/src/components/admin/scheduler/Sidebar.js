@@ -13,29 +13,6 @@ function Sidebar() {
   const date = new Date()
   const formate = format(date, 'dd MMM, yyyy', { locale: es })
 
-  function days(day) {
-    var dayOfWeek = ''
-
-    switch (day) {
-      case 'Monday':
-        return (dayOfWeek = 'Lunes')
-      case 'Tuesday':
-        return (dayOfWeek = 'Martes')
-      case 'Wednesday':
-        return (dayOfWeek = 'Miercoles')
-      case 'Thursday':
-        return (dayOfWeek = 'Jueves')
-      case 'Friday':
-        return (dayOfWeek = 'Viernes')
-      case 'Saturday':
-        return (dayOfWeek = 'Sábado')
-      case 'Sunday':
-        return (dayOfWeek = 'Domingo')
-      default:
-        return (dayOfWeek = '')
-    }
-  }
-
   const contentMain = (assistant, index) => {
     const img = (assistant) => {
       const name = assistant.name.replace(/[a-z]/g, '').substr(-3, 2)

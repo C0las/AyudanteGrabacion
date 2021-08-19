@@ -58,7 +58,7 @@ class Modal extends React.Component {
       if (key === id) {
         list.splice(count, 1)
       }
-      count++
+      return count++
     })
 
     this.setState({ data: list })

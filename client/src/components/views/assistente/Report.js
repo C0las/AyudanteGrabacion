@@ -7,36 +7,28 @@ import { withRouter } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  fetchSelectedAssistant,
-  removeSelectedAssistant
-} from '../../../redux/actions/assistantActions'
+import { fetchSelectedAssistant } from '../../../redux/actions/assistantActions'
 
 const Report = (props) => {
   let history = useHistory()
-  const assistant = useSelector((state) => state.assistant.assistant)
-  const address = useSelector((state) => state.assistant.assistant.address)
-  const paymentDetails = useSelector(
-    (state) => state.assistant.assistant.paymentDetails
-  )
-  const loading = useSelector((state) => state.assistant.loading)
+  const assistant = useSelector((state) => state.assistant?.assistant)
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  console.log(id)
+  const { name, lastName } = assistant
 
-  const { name, lastname } = assistant
+  console.log(id)
 
   useEffect(() => {
     async function asyncFetch() {
       dispatch(fetchSelectedAssistant(id))
     }
 
-    asyncFetch()
+    asyncFetch().then(() => {})
   }, [dispatch, id])
 
   const [report, setReport] = useState({
-    name: name,
+    name: name + ' ' + lastName,
     motivo: '',
     observacion: '',
     clase: '',
@@ -49,10 +41,6 @@ const Report = (props) => {
   }
 
   const handleChange = (e) => {
-    setReport({
-      ...report,
-      [e.target.name]: e.target.value
-    })
     setReport({
       ...report,
       [e.target.name]: e.target.value
@@ -78,7 +66,7 @@ const Report = (props) => {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center gap-10 p-3 lg:p-10'>
+    <div className='flex flex-col w-full items-center justify-center gap-10 p-3 lg:p-10'>
       <form
         onSubmit={(e) => handleSubit(e)}
         className='flex flex-col items-center bg-white shadow-md rounded p-10'
@@ -94,8 +82,8 @@ const Report = (props) => {
             </label>
             <input
               name='name'
-              value={name}
-              className=' bg-gray-200 text-black border border-gray-200 rounded h-10  max-w-min pl-3'
+              value={name + ' ' + lastName}
+              className=' bg-gray-200 text-black border border-gray-200 rounded h-10  max-w-min pl-3 truncate'
               onChange={(e) => handleChange(e)}
             />
           </div>

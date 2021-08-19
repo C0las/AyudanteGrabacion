@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addDays, format } from 'date-fns'
-import { es } from 'date-fns/locale'
+import { format } from 'date-fns'
 import { LocationMarkerIcon, UserIcon } from '@heroicons/react/outline'
 import {
   assistantUpdateRequest,
@@ -18,7 +17,7 @@ import { ReactComponent as Calendario } from '../../../assets/calendario.svg'
 
 function AssistantSchedulerDay() {
   const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
-  const [dayView, setViewDay] = useState(days)
+  const [dayView] = useState(days)
   const today = useSelector((state) => state.allAssistants.currentDay)
   const dispatch = useDispatch()
   const data = useSelector(filterAssistantSchedulerSelector)

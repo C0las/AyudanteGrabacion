@@ -1,7 +1,6 @@
 import { ActionTypes } from '../constants/action-types'
 import * as authService from '../../services/auth'
 import storePersist from '../storePersist'
-import { useHistory } from 'react-router-dom'
 
 export const login = (loginAdminData, history) => async (dispatch) => {
   dispatch({
@@ -16,7 +15,9 @@ export const login = (loginAdminData, history) => async (dispatch) => {
       loading: false,
       isLoggedIn: true
     }
+
     storePersist.set('auth', authValue)
+
     dispatch({
       type: ActionTypes.LOGIN_SUCCESS,
       payload: data.result.user

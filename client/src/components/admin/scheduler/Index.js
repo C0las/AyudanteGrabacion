@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ViewState } from '@devexpress/dx-react-scheduler'
 import {
@@ -15,22 +14,15 @@ import {
   CurrentTimeIndicator
 } from '@devexpress/dx-react-scheduler-material-ui'
 import AppointmentContent from '../../common/AppointmentContent'
-import {
-  setCurrentDate,
-  setSchedulers
-} from '../../../redux/actions/schedulerActions'
-import { hourWork, hourWork1 } from '../../../redux/selectors/calculated'
+import { setCurrentDate } from '../../../redux/actions/schedulerActions'
 
 function SchedulerContainer() {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.allScheduler?.scheduler)
-  const schools = useSelector((state) => state.allScheduler.schools)
   const currentDate = useSelector((state) => state.allScheduler.currentDate)
+  //const datee = useSelector(hourWork1)
 
-  const [appoint, setAppoint] = useState({ data: data })
-  const datee = useSelector(hourWork1)
-
-  const test = () => {
+  /*const test = () => {
     const hour = datee.map((e) => e.hour)
     const minute = datee.map((e) => e.minute)
 
@@ -45,7 +37,7 @@ function SchedulerContainer() {
     }
 
     return horas + 'h' + minutos
-  }
+  }*/
 
   /*const handleButtonClick = (schoolName, schools) => {
     if (schools.indexOf(schoolName) > -1) {
