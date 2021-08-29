@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://ayudantegrabacion.inndo.cl/",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@date-io/date-fns": "^1.3.13",

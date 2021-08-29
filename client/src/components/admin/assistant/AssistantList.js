@@ -2,12 +2,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import swal from 'sweetalert'
 import CardAssistant from './CardAssistant'
 import CardAssistantLoading from '../../common/CardAssistantLoading'
-import { filterAssistantsSelector } from '../../../redux/selectors/filter'
+import {
+  filterAssistants,
+  filterAssistantsSelector
+} from '../../../redux/selectors/filter'
 
 import { assistantDeleteRequest } from '../../../redux/actions/assistantActions'
 
 const AssistantList = () => {
-  let assistants = useSelector(filterAssistantsSelector)
+  let assistants = useSelector(filterAssistants)
   const loading = useSelector((state) => state.allAssistants.loading)
   const dispatch = useDispatch()
 

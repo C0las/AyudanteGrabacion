@@ -18,7 +18,9 @@ const Navbar = () => {
     }).then((willDelete) => {
       if (willDelete) {
         swal('¡La sesión se ha cerrado con éxito!', {
-          icon: 'success'
+          buttons: false,
+          icon: 'success',
+          timer: 1000
         }).then(() => history.push('/logout'))
       }
     })

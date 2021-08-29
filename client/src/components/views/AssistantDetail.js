@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -9,7 +9,7 @@ import {
 import AssistantDetailLoading from '../common/AssistantDetailLoading'
 
 const AssistantDetail = (props) => {
-  const assistant = useSelector((state) => state.assistant.assistant)
+  var assistant = useSelector((state) => state.assistant?.assistant)
   const address = useSelector((state) => state.assistant.assistant.address)
   const paymentDetails = useSelector(
     (state) => state.assistant.assistant.paymentDetails
@@ -18,9 +18,7 @@ const AssistantDetail = (props) => {
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  console.log(id)
-
-  const { name, lastName, rut, mail, fono } = assistant
+  const { name, lastName, rut, mail, fono } = assistant || {}
   const { street, city, commune } = address || {}
   const { accountNumber, bankName, accountType } = paymentDetails || {}
   const { img, titleName } = props.location.state
@@ -37,20 +35,25 @@ const AssistantDetail = (props) => {
       {loading ? (
         <AssistantDetailLoading />
       ) : (
-        <div className='flex flex-col items-center p-10 w-full  gap-5'>
-          <div className='flex flex-row items-center w-full'>
-            <h1 className='text-white text-xl font-semibold w-2/12'>
+        <div className='flex flex-col items-center p-10 w-full h-screen gap-5 overflow-auto'>
+          <div className='flex flex-row items-baseline w-full'>
+            <h1 className='text-gray-800 text-xl font-semibold w-2/12'>
               Perfil de Usuario
             </h1>
-            <span className='w-11/12 h-0 border border-white' />
+            <span className='w-11/12 h-0 border border-gray-300 ' />
           </div>
 
-          <div className='flex flex-row items-center bg-white w-full rounded-md'>
+          <div className='flex flex-row items-center w-full'>
             <div className='flex flex-col items-center p-10 gap-2 border-r-2 border-gray-300 w-3/12'>
               <div className='flex items-center justify-center rounded-full w-20 h-20 bg-primary'>
                 <span className='text-2xl font-bold text-white'>{img}</span>
               </div>
               <h1 className='text-gray-800 font-bold'>{titleName}</h1>
+
+              <div className='flex flex-row gap-2'>
+                <h1 className='text-gray-600 text-xs font-medium'>ID: </h1>
+                <h1 className='text-gray-600 text-xs font-medium'>{id}</h1>
+              </div>
             </div>
 
             <div className='flex flex-col p-10 text-xs w-10/12 divide-y-2 divide-gray-200'>
@@ -122,9 +125,6 @@ const AssistantDetail = (props) => {
                 </div>
               </div>
             </div>
-          </div>
-          <div>
-            <div></div>
           </div>
         </div>
       )}

@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
 import PageLoader from '../components/common/PageLoader'
+import api from '../api/assistants'
 
 // Ayudante
 const Home = lazy(() => import('../components/views/assistente/Home'))

@@ -24,55 +24,56 @@ export default function Home() {
   useEffect(() => {
     async function asyncFetch() {
       dispatch(fetchSelectedAssistant(id))
-      await dispatch(fetchSchedulers)
+      dispatch(fetchSchedulers)
     }
 
     asyncFetch()
   }, [dispatch, id])
 
   return (
-    <>
-      <div className='flex flex-col w-full items-center'>
-        <div className='flex flex-row items-center justify-between w-full pl-10 pr-10 mt-5'>
-          <h1 className='text-lg text-gray-700 font-semibold select-none'>
-            Horario
-          </h1>
-          <div className='flex flex-row items-center gap-7'>
-            {view ? (
-              <button
-                className='flex items-center justify-center bg-transparent hover:bg-gray-200 active:bg-gray-200 rounded-full h-8 w-8'
-                onClick={() => setView(!view)}
-              >
-                <ViewBoardsIcon className='h-6 w-6 text-gray-600' />
-              </button>
-            ) : (
-              <button
-                className='flex items-center justify-center bg-transparent hover:bg-gray-200 active:bg-gray-200 rounded-full h-8 w-8'
-                onClick={() => setView(!view)}
-              >
-                <ViewGridIcon className='h-6 w-6 text-gray-600' />
-              </button>
-            )}
-
-            <button className='flex items-center justify-center hover:bg-gray-200 active:bg-gray-200 rounded-full h-8 w-8'>
-              <RefreshIcon className='h-6 w-6 text-gray-600' />
+    <div className='flex flex-col w-full items-center'>
+      <div className='flex flex-row items-center justify-between w-full pl-10 pr-10 mt-5'>
+        <h1 className='text-lg text-gray-700 font-semibold select-none'>
+          Horario
+        </h1>
+        <div className='flex flex-row items-center gap-7'>
+          {view ? (
+            <button
+              className='flex items-center justify-center bg-transparent hover:bg-gray-200 active:bg-gray-200 rounded-full h-8 w-8'
+              onClick={() => setView(!view)}
+            >
+              <ViewBoardsIcon className='h-6 w-6 text-gray-600' />
             </button>
-          </div>
-        </div>
+          ) : (
+            <button
+              className='flex items-center justify-center bg-transparent hover:bg-gray-200 active:bg-gray-200 rounded-full h-8 w-8'
+              onClick={() => setView(!view)}
+            >
+              <ViewGridIcon className='h-6 w-6 text-gray-600' />
+            </button>
+          )}
 
-        {view ? (
-          <div className='h-screen overflow-auto'>
-            <SchedulerByWeek />
-          </div>
-        ) : (
-          <div
-            className='flex flex-col items-start justify-center
-         w-full  mt-5'
+          <button
+            onClick={() => dispatch(fetchSchedulers)}
+            className='flex items-center justify-center hover:bg-gray-200 active:bg-gray-200 rounded-full h-8 w-8'
           >
-            <SchedulerByDay />
-          </div>
-        )}
+            <RefreshIcon className='h-6 w-6 text-gray-600' />
+          </button>
+        </div>
       </div>
-    </>
+
+      {view ? (
+        <div className='h-screen overflow-auto'>
+          <SchedulerByWeek />
+        </div>
+      ) : (
+        <div
+          className='flex flex-col items-start justify-start
+         w-full pt-3 overflow-auto'
+        >
+          <SchedulerByDay />
+        </div>
+      )}
+    </div>
   )
 }

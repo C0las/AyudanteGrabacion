@@ -2,6 +2,7 @@ import { ActionTypes } from '../constants/action-types'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 
+const todayMonth = format(new Date(), 'EEEE dd/MM', { locale: es })
 const today = format(new Date(), 'EEEE', { locale: es })
 
 // Se define el valor por defecto del 'state'
@@ -9,7 +10,8 @@ const initialState = {
   assistants: [],
   report: [],
   currentFilter: '',
-  currentDay: today.replace(/^\w/, (c) => c.toUpperCase()),
+  selectDay: today.replace(/^\w/, (c) => c.toUpperCase()),
+  currentDay: todayMonth.replace(/^\w/, (c) => c.toUpperCase()),
   loading: false
 }
 
@@ -33,6 +35,11 @@ export const assistantReducer = (state = initialState, action) => {
     case ActionTypes.DELETE_ASSISTANT:
       // Devuelve todo el 'state' actual, modificando 'assistants', añadiendo un nuevo objeto(s)
       return { ...state, loading: false }
+
+    case ActionTypes.ADD_ASSISTANT:
+      return {
+        ...state
+      }
     case ActionTypes.SET_ASSISTANTS:
       // Devuelve todo el 'state' actual, modificando 'assistants', añadiendo un nuevo objeto(s)
       return { ...state, assistants: action.payload }
@@ -42,6 +49,9 @@ export const assistantReducer = (state = initialState, action) => {
 
     case ActionTypes.SET_CURRENT_DAY:
       return { ...state, currentDay: action.payload }
+
+    case ActionTypes.SET_SELECTED_DAY:
+      return { ...state, selectDay: action.payload }
 
     case ActionTypes.FETCH_REPORT:
       return { ...state, report: action.payload, loading: false }

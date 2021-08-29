@@ -1,103 +1,106 @@
-import React from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import swal from 'sweetalert'
+import { assistantAddRequest } from '../../../redux/actions/assistantActions'
 
-class AddAssistant extends React.Component {
-  state = {
-    Name: '',
-    Rut: '',
-    Email: '',
-    Fono: '',
-    Address: {
-      Street: '',
-      City: '',
-      Commune: ''
-    },
-    PaymentDetails: {
-      AccountNumber: '',
-      BankName: '',
-      AccountType: ''
-    }
+function AddAssistant(props) {
+  const dispatch = useDispatch()
+  const [isEmpty, setIsEmpty] = useState(true)
+  const [selectedForm, setSelectedForm] = useState({
+    name: '',
+    lastName: '',
+    rut: '',
+    fono: '',
+    mail: '',
+    daysAvailable: {},
+    address: { street: '', city: '', commune: '' },
+    paymentDetails: { accountNumber: '', accountType: '', bankName: '' }
+  })
+
+  const handleChange = (e) => {
+    setSelectedForm({
+      ...selectedForm,
+      [e.target.name]: e.target.value
+    })
   }
 
-  add = (e) => {
+  const insert = (e) => {
     e.preventDefault()
-    if (
-      this.state.Name === '' ||
-      this.state.Rut === '' ||
-      this.state.Email === '' ||
-      this.state.Fono === ''
-    ) {
-      alert('Todos los campos estan vacios')
-      return
-    }
-
-    this.props.addAssistantHandler(this.state)
-    this.setState({ Name: '', Rut: '', Email: '', Fono: '' })
+    var data = selectedForm
+    dispatch(assistantAddRequest(data))
+    swal(
+      'Añadir Ayudante',
+      '¡El ayudante ha sido agregado correctamente!',
+      'success'
+    ).then(() => props.open(false))
   }
 
-  render() {
-    return (
-      <div className='flex flex-col items-center'>
-        <h2>Add Assistant</h2>
-        <form className='flex flex-col gap-3 w-full' onSubmit={this.add}>
-          <div className='flex items-center gap-2'>
-            <div className='flex flex-col gap-2'>
-              <label>Name</label>
-              <input
-                className='border-2 border-gray-300 h-10 rounded-md p-2 outline-none'
-                type='text'
-                name='name'
-                placeholder='Name'
-                value={this.state.Name}
-                onChange={(e) => this.setState({ Name: e.target.value })}
-              />
-            </div>
-          </div>
-
-          <div className='flex flex-col gap-2'>
-            <label>Rut</label>
-            <input
-              className='border-2 border-gray-300 h-10 rounded-md p-2 outline-none'
-              type='text'
-              name='rut'
-              placeholder='Rut'
-              value={this.state.Rut}
-              onChange={(e) => this.setState({ Rut: e.target.value })}
-            />
-          </div>
-
-          <div className='flex flex-col gap-2'>
-            <label>Email</label>
-            <input
-              className='border-2 border-gray-300 h-10 rounded-md p-2 outline-none'
-              type='text'
-              name='email'
-              placeholder='Email'
-              value={this.state.Email}
-              onChange={(e) => this.setState({ Email: e.target.value })}
-            />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <label>Fono</label>
-            <div className='flex items-center gap-2 w-full'>
-              <label className='text-gray-500'>+56</label>
-              <input
-                className='border-2 border-gray-300 h-10 rounded-md p-2 outline-none w-full'
-                type='text'
-                name='fono'
-                placeholder='Fono'
-                value={this.state.Fono}
-                onChange={(e) => this.setState({ Fono: e.target.value })}
-              />
-            </div>
-          </div>
-
-          <button className='bg-primary text-white rounded-lg p-3'>
-            Add Assistant
-          </button>
-        </form>
+  return (
+    <div className='grid grid-cols-2 gap-3 mt-4'>
+      <input
+        type='text'
+        required={true}
+        value={selectedForm.name}
+        onChange={(e) => handleChange(e)}
+        name='name'
+        placeholder='Ingresar nombres'
+        className='text-xs py-2 px-2 border border-gray-300 rounded-lg'
+      />
+      <input
+        type='text'
+        value={selectedForm.lastName}
+        onChange={(e) => handleChange(e)}
+        name='lastName'
+        placeholder='Ingresar apellidos'
+        className='text-xs py-2 px-2 border border-gray-300 rounded-lg'
+      />
+      <input
+        type='text'
+        value={selectedForm.rut}
+        onChange={(e) => handleChange(e)}
+        name='rut'
+        placeholder='Ingresar rut con guion sin puntos'
+        className='text-xs py-2 px-2 border border-gray-300 rounded-lg'
+      />
+      <div className='flex flex-row'>
+        <span className='bg-gray-200 text-xs text-gray-500 font-medium border border-gray-300 rounded-l-lg py-2 px-1'>
+          +56
+        </span>
+        <input
+          type='number'
+          onChange={(e) => handleChange(e)}
+          value={selectedForm.fono}
+          name='fono'
+          placeholder='Ingresar telefono'
+          className='text-xs py-2 px-2 border border-gray-300 rounded-r-lg'
+        />
       </div>
-    )
-  }
+      <input
+        type='email'
+        value={selectedForm.mail}
+        onChange={(e) => handleChange(e)}
+        name='mail'
+        placeholder='Ingresar correo electrónico'
+        className='text-xs py-2 px-2 col-span-2 border border-gray-300 rounded-lg'
+      />
+      <div className='flex flex-row items-center gap-3 col-span-2'>
+        <button
+          type='button'
+          onClick={(e) => insert(e)}
+          className='w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-gray-200 rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+        >
+          Añadir
+        </button>
+
+        <button
+          className='w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border-2 border-gray-200 rounded-md hover:bg-red-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
+          onClick={() => props.open(false)}
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default AddAssistant

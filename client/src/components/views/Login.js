@@ -50,7 +50,7 @@ const LoginPage = () => {
                 type='text'
                 required
                 className='appearance-none rounded-none relative block w-full py-2 pl-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='Nombre de Usuario'
+                placeholder='Ingresa tu usuario'
                 onChange={handleInput}
               />
             </div>
@@ -63,7 +63,7 @@ const LoginPage = () => {
                 type='email'
                 required
                 className='appearance-none rounded-none relative block w-full py-2 pl-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='example@gmail.com'
+                placeholder='Ingresa tu correo'
                 onChange={handleInput}
               />
             </div>
@@ -76,7 +76,7 @@ const LoginPage = () => {
                 type='password'
                 required
                 className='appearance-none rounded-none relative block w-full py-2 pl-2 border-b-2 border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                placeholder='*****'
+                placeholder='Ingresa tu contraseña'
                 onChange={handleInput}
               />
             </div>
@@ -100,7 +100,9 @@ const LoginPage = () => {
             </div>
           </form>
         </div>
-        <h1 className='font-light text-xs text-gray-400'>version 1.0982021</h1>
+        <h1 className='font-light text-xs text-gray-400'>
+          version 1.028820212227
+        </h1>
       </div>
     </div>
   )

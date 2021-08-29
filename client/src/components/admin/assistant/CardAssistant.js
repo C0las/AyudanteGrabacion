@@ -1,11 +1,14 @@
 import { Link, useRouteMatch } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { TrashIcon, PencilIcon } from '@heroicons/react/solid'
+import { useSelector } from 'react-redux'
 
 const CardAssistant = (props) => {
-  const { _id, rut } = props.assistant
+  const { _id, rut, daysAvailable } = props.assistant
   const img = props.img
   const titleName = props.name
+
+  const viewAssistant = useSelector((state) => state.allAssistants?.selectDay)
 
   let { url } = useRouteMatch()
 
@@ -17,9 +20,6 @@ const CardAssistant = (props) => {
       className='flex flex-col items-center justify-center rounded-md gap-3 p-3 shadow-md border border-gray-100'
     >
       <div className='flex items-center justify-end gap-2 w-full text-gray-400'>
-        <button className='flex items-center justify-center rounded-full border border-dashed border-gray-400 bg-transparent w-6 h-6'>
-          <PencilIcon className='h-4 w-4 hover:text-green-600' />
-        </button>
         <button
           onClick={() => props.clickHandler(_id)}
           className='flex items-center justify-center rounded-full border border-dashed border-gray-400 bg-transparent w-6 h-6'
@@ -34,6 +34,25 @@ const CardAssistant = (props) => {
         <h1 className='font-semibold'>{titleName}</h1>
         <p className='text-xs font-light'>{rut}</p>
       </div>
+
+      {daysAvailable
+        .filter((val) => val.day.includes(viewAssistant))
+        .map((val) => {
+          return (
+            <div className='flex flex-row w-full items-center justify-center gap-1 text-xs'>
+              {val.hour.map((hour) => (
+                <spam
+                  className={`${
+                    hour === 'Mañana' ? 'bg-blue-500' : 'bg-yellow-600'
+                  } flex items-center justify-center  text-white rounded-sm h-4 w-12`}
+                >
+                  {hour}
+                </spam>
+              ))}
+            </div>
+          )
+        })}
+
       <Link
         to={{
           pathname: `${url}/assistantDetail/${_id}`,

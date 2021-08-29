@@ -19,6 +19,9 @@ import { filterAssistantSchedulerSelector } from '../../../redux/selectors/filte
 function AssistantSchedulerWeek() {
   const dispatch = useDispatch()
   const data = useSelector(filterAssistantSchedulerSelector)
+  const dataConfirmation = data.filter((e) =>
+    e.confirmationTurn.includes('Confirmado')
+  )
   const currentDate = useSelector((state) => state.allScheduler.currentDate)
 
   const FlexibleSpace = ({ ...restProps }) => (
@@ -31,9 +34,8 @@ function AssistantSchedulerWeek() {
   const DEPARTMENT = [
     'Preparador Físico',
     'Actuación',
-    'Sonido',
-    'Administración de Redes y Telecomunicaciones',
-    'Audiovisual'
+    'Sonido y Audiovisual',
+    'Redes y Telecomunicaciones'
   ]
 
   const resources = [
@@ -51,7 +53,7 @@ function AssistantSchedulerWeek() {
   ]
   return (
     <>
-      <Scheduler data={data} locale='es-Cl' firstDayOfWeek={1}>
+      <Scheduler data={dataConfirmation} locale='es-Cl' firstDayOfWeek={1}>
         <ViewState
           currentDate={currentDate}
           onCurrentDateChange={(currentDate) =>

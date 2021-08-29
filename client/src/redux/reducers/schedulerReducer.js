@@ -7,7 +7,8 @@ const initialState = {
     'Escuela de Comunicación',
     'Escuela de Informática'
   ],
-  currentDate: new Date()
+  currentDate: new Date(),
+  currentFilter: ''
 }
 
 export const schedulerReducer = (state = initialState, action) => {
@@ -28,6 +29,15 @@ export const schedulerReducer = (state = initialState, action) => {
       return {
         ...state
       }
+
+    case ActionTypes.DELETE_SCHEDULER:
+      return {
+        ...state
+      }
+
+    case ActionTypes.FILTER_SCHEDULER:
+      return { ...state, currentFilter: action.payload }
+
     case ActionTypes.CURRENT_DATE_SCHEDULER:
       return {
         ...state,
@@ -37,20 +47,3 @@ export const schedulerReducer = (state = initialState, action) => {
       return state
   }
 }
-
-/*const initialState = {
-  scheduler: []
-}
-
-export const schedulerReducer = (state = schedulerInitialState, action) => {
-  switch (action.type) {
-    case SCHEDULER_STATE_CHANGE_ACTION:
-      return {
-        ...state,
-        [action.payload.partialStateName]: action.payload.partialStateValue
-      }
-
-    default:
-      return state
-  }
-}*/

@@ -10,15 +10,15 @@ import {
   ViewSwitcher,
   Resources,
   AppointmentForm,
-  AppointmentTooltip,
   CurrentTimeIndicator
 } from '@devexpress/dx-react-scheduler-material-ui'
 import AppointmentContent from '../../common/AppointmentContent'
 import { setCurrentDate } from '../../../redux/actions/schedulerActions'
+import { filterSchedulerSelector } from '../../../redux/selectors/filter'
 
 function SchedulerContainer() {
   const dispatch = useDispatch()
-  const data = useSelector((state) => state.allScheduler?.scheduler)
+  let data = useSelector(filterSchedulerSelector)
   const currentDate = useSelector((state) => state.allScheduler.currentDate)
   //const datee = useSelector(hourWork1)
 
@@ -39,45 +39,6 @@ function SchedulerContainer() {
     return horas + 'h' + minutos
   }*/
 
-  /*const handleButtonClick = (schoolName, schools) => {
-    if (schools.indexOf(schoolName) > -1) {
-      return schools.filter((school) => school !== schoolName)
-    }
-    const nextSchools = [...schools]
-    nextSchools.push(schoolName)
-    return nextSchools
-  }*/
-
-  /*const LocationSelector = (props) => (
-    <div className='flex items-center gap-2'>
-      {props.schools.map((school) => {
-        console.log(school)
-        return (
-          <>
-            <input
-              type='checkbox'
-              name={school}
-              id={school}
-              defaultChecked={true}
-              onClick={() => {
-                dispatch(handleButtonClick(school, schools))
-              }}
-              key={school}
-              className=''
-            />
-            <label
-              for={school}
-              className='
-              inline-block text-center w-24 text-sm bg-gray-100 rounded cursor-pointer select-none'
-            >
-              {school}
-            </label>
-          </>
-        )
-      })}
-    </div>
-  )*/
-
   const FlexibleSpace = ({ ...restProps }) => (
     <Toolbar.FlexibleSpace
       {...restProps}
@@ -90,9 +51,8 @@ function SchedulerContainer() {
   const DEPARTMENT = [
     'Preparador Físico',
     'Actuación',
-    'Sonido',
-    'Redes y Telecomunicaciones',
-    'Audiovisual'
+    'Sonido y Audiovisual',
+    'Redes y Telecomunicaciones'
   ]
 
   const resources = [
@@ -103,8 +63,7 @@ function SchedulerContainer() {
         { id: DEPARTMENT[0], text: DEPARTMENT[0], color: '#36A5C4' },
         { id: DEPARTMENT[1], text: DEPARTMENT[1], color: '#BF0249' },
         { id: DEPARTMENT[2], text: DEPARTMENT[2], color: '#F78B30' },
-        { id: DEPARTMENT[3], text: DEPARTMENT[3], color: '#939393' },
-        { id: DEPARTMENT[4], text: DEPARTMENT[4], color: '#132CAA' }
+        { id: DEPARTMENT[3], text: DEPARTMENT[3], color: '#939393' }
       ]
     }
   ]
@@ -133,8 +92,7 @@ function SchedulerContainer() {
       />
 
       <Appointments appointmentContentComponent={AppointmentContent} />
-      <AppointmentTooltip showCloseButton />
-      <AppointmentForm />
+
       <CurrentTimeIndicator shadePreviousCells={false} />
       <Resources data={resources} />
       <Toolbar flexibleSpaceComponent={FlexibleSpace} />
@@ -144,35 +102,4 @@ function SchedulerContainer() {
   )
 }
 
-/*
-const mapStateToProps = (state) => {
-  // Recupera los elementos (Escuelas) a filtrar
-  let data = state.allScheduler.data.filter(
-    (dataItem) => state.allScheduler.schools.indexOf(dataItem.school) > -1
-  )
-  // Se captura la cadena del campo de entrada
-  const lowerCaseFilter = state.allScheduler.currentFilter.toLowerCase()
-  // Filtra los elementos del campo title y school
-  data = data.filter(
-    (dataItem) =>
-      dataItem.title.toLowerCase().includes(lowerCaseFilter) ||
-      dataItem.department.toLowerCase().includes(lowerCaseFilter)
-  )
-  return { ...state.allScheduler, data }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  onCurrentDateChange: (currentDate) =>
-    dispatch(createSchedulerAction('currentDate', currentDate)),
-  onCurrentViewNameChange: (currentViewName) =>
-    dispatch(createSchedulerAction('currentViewName', currentViewName)),
-  onSchoolsChange: (schools) =>
-    dispatch(createSchedulerAction('schools', schools))
-})
-
-const ReduxLocationSelector = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LocationSelector)
-*/
 export default SchedulerContainer

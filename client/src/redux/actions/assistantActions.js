@@ -44,6 +44,13 @@ export const setCurrentDay = (currentDay) => (dispatch) => {
   })
 }
 
+export const setSelectedDay = (select) => (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_SELECTED_DAY,
+    payload: select
+  })
+}
+
 const assistantDelete = () => ({ type: ActionTypes.DELETE_ASSISTANT })
 
 export const assistantDeleteRequest = (id) => async (dispatch) => {
@@ -69,6 +76,16 @@ export const assistantUpdateRequest = (id, data) => async (dispatch) => {
       .then((resp) => console.log('resp', resp))
     dispatch({ type: ActionTypes.UPDATE_ASSISTANT, payload: data })
   } catch (error) {}
+}
+
+export const assistantAddRequest = (assistant) => async (dispatch) => {
+  try {
+    await api.post('assistant', assistant).then(({ data }) => data)
+    dispatch({ type: ActionTypes.ADD_ASSISTANT })
+    dispatch(fetchAssistants)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 // Modifica o Actualiza el 'state' del assistente
