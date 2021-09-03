@@ -88,6 +88,7 @@ function SchedulerContainer() {
         displayName='Semanas'
         startDayHour={8}
         endDayHour={21}
+        cellDuration={15}
         excludedDays={[0, 6]}
       />
 

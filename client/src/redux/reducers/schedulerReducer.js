@@ -35,6 +35,11 @@ export const schedulerReducer = (state = initialState, action) => {
         ...state
       }
 
+    case ActionTypes.UPDATE_SCHEDULER:
+      return {
+        ...state
+      }
+
     case ActionTypes.FILTER_SCHEDULER:
       return { ...state, currentFilter: action.payload }
 
